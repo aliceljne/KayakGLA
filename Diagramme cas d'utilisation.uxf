@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>160</x>
+      <y>280</y>
+      <w>80</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>Utilisateur</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>750</x>
+      <y>290</y>
+      <w>120</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>Serveur Google</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>440</x>
+      <y>290</y>
+      <w>160</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Traiter la demande
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>430</x>
+      <y>200</y>
+      <w>170</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Cherche une sortie
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>510</x>
+      <y>120</y>
+      <w>180</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Donner ses préférences</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>510</x>
+      <y>140</y>
+      <w>100</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;include&gt;&gt;</panel_attributes>
+    <additional_attributes>20.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>220</x>
+      <y>210</y>
+      <w>230</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;110.0;210.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>590</x>
+      <y>290</y>
+      <w>200</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;20.0;180.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>330</x>
+      <y>50</y>
+      <w>380</w>
+      <h>350</h>
+    </coordinates>
+    <panel_attributes>Kayak</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
