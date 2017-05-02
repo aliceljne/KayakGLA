@@ -18,7 +18,7 @@ public class Interface extends JFrame {
 			"17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};			
 	//String[] tabMois = {"Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre"};
 	String[] tabMois = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
-	String[] tabHoraire = {"16h", "17h", "18h", "19h", "20h", "21h", "22h", "23h", "00h", "1h", "2h"};
+	String[] tabHoraire = {"16", "17", "18", "19", "20", "21", "22", "23", "00", "1", "2"};
 	String[] tabTransport = {"Marche", "Vélo", "Voiture", "Transports en commun"};
 	private JCheckBox check1 = new JCheckBox("Végétarien");
 	private JCheckBox check2 = new JCheckBox("Grec");
@@ -34,6 +34,7 @@ public class Interface extends JFrame {
 	private JLabel jour = new JLabel("Jour");
 	private JLabel mois = new JLabel("Mois");
 	private JLabel horaire = new JLabel("Horaires");
+	private JLabel heures = new JLabel("Heures");
 	private JLabel transport = new JLabel("Transport");
 	private JLabel restos = new JLabel("Type(s) de restaurant :");
 	private JLabel adresses = new JLabel("Adresse(s) :");
@@ -83,6 +84,7 @@ public class Interface extends JFrame {
 		JPanel horairePanel = new JPanel();
 		horairePanel.add(horaire);
 		horairePanel.add(comboHoraire);
+		horairePanel.add(heures);
 		container.add(horairePanel);
 		// Ajout du listener
 		comboHoraire.addItemListener(new ItemState());
@@ -239,8 +241,9 @@ public class Interface extends JFrame {
 	    		String mois = (String) comboMois.getSelectedItem();
 	    		String dateStr = jour+"/"+mois+"/2017";
 	    		SimpleDateFormat date = new SimpleDateFormat(dateStr);
-	    	//	u.ajoutDateEtHoraire(date, comboHoraire.getSelectedIndex());
-				u.afficheDateEtHoraire(date, comboHoraire.getSelectedIndex());
+	    		String horaire = (String) comboHoraire.getSelectedItem();
+	    		u.ajoutDateEtHoraire(date, horaire);
+				u.afficheDateEtHoraire(date, horaire);
 	    	}
 	     // System.out.println("événement déclenché sur : " + e.getItem());
 	    }               
