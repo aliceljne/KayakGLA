@@ -46,7 +46,7 @@ public class Interface extends JFrame {
 		// On nomme la fenetre
 		this.setTitle("Kayak");
 		// On definit sa taille en largeur et en hauteur
-		this.setSize(800, 400);
+		this.setSize(800, 450);
 		// On place la fenetre au milieu
 		this.setLocationRelativeTo(null);
 		// On termine le processus lorsqu'on clique sur la croix rouge
@@ -58,7 +58,7 @@ public class Interface extends JFrame {
 		comboJour.setPreferredSize(new Dimension(100, 20));
 		comboMois.setPreferredSize(new Dimension(120, 20));
 		comboHoraire.setPreferredSize(new Dimension(100, 20));
-		comboTransport.setPreferredSize(new Dimension(120, 20));
+		comboTransport.setPreferredSize(new Dimension(200, 20));
 		
 		JPanel datePanel = new JPanel();
 		datePanel.add(jour);
@@ -145,14 +145,25 @@ public class Interface extends JFrame {
 		    }
 
 	}
-	public class BoutonListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			 System.out.println("Valider");
-
-		}
+	class BoutonListener implements ActionListener {
+	    public void actionPerformed(ActionEvent e) {
+	      System.out.println("Valider");
+	      JFrame f = new JFrame();
+	      f.setTitle("Merci de patienter...");
+	      f.setSize(800, 200);
+	      f.setLocationRelativeTo(null);
+	      
+	      /*setContentPane(buildContentPane());
+	      
+	    private JPanel buildContentPane(){
+	    	JPanel panel = new JPanel();
+		    panel.setLayout(new FlowLayout());
+		    JLabel label = new JLabel("Merci de patienter...");
+		    panel.add(label);
+		    return panel;
+	    }*/
+	      f.setVisible(true);
+	    }
 	}
 
 	public static void main(String[] args) {
