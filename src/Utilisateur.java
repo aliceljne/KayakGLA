@@ -36,10 +36,38 @@ public class Utilisateur {
 	}
 	
 	public void supprimePreference(String p){
-		this.preferences.add(p);
+		this.preferences.remove(p);
 	}
 	
+	// Affiche date et horaire
+	public void afficheDateEtHoraire(){
+		System.out.println("Date : "+this.date.format(new Date()));
+		System.out.println("Horaire début : "+this.horaireDebut+" heures");
+		System.out.println("\n");
+	}
 	
+	// Affiche transport
+	public void afficheTransport(){
+		System.out.println("Transport : "+this.transport);
+	}
+	
+	// Affiche préférences
+	public void affichePreferences(ArrayList<String> a){
+		System.out.println("Préférences :");
+		for(String line : a){
+			System.out.println(line);
+		}
+		System.out.println("\n");
+	}
+	
+	// Affiche adresses
+	public void afficheAdresses(ArrayList<String> a){
+		System.out.println("Adresses :");
+		for(String line : a){
+			System.out.println(line);
+		}
+		System.out.println("\n");
+	}
 	
 
 }
