@@ -6,12 +6,13 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-
 import javax.swing.*;
 
 public class Interface extends JFrame {
+	Utilisateur u = new Utilisateur();
 	private JPanel container = new JPanel();
 	String[] tabJour = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16",
 			"17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};			
@@ -41,12 +42,17 @@ public class Interface extends JFrame {
 	private JTextField addr3 = new JTextField("");
 	private JTextField addr4 = new JTextField("");
 	private JTextField addr5 = new JTextField("");
+	private JButton ok1 = new JButton("Ajouter");
+	private JButton ok2 = new JButton("Ajouter");
+	private JButton ok3 = new JButton("Ajouter");
+	private JButton ok4 = new JButton("Ajouter");
+	private JButton ok5 = new JButton("Ajouter");
 	
 	public Interface() {
 		// On nomme la fenetre
 		this.setTitle("Kayak");
 		// On definit sa taille en largeur et en hauteur
-		this.setSize(800, 450);
+		this.setSize(800, 650);
 		// On place la fenetre au milieu
 		this.setLocationRelativeTo(null);
 		// On termine le processus lorsqu'on clique sur la croix rouge
@@ -114,12 +120,22 @@ public class Interface extends JFrame {
 	    addr5.setFont(police);
 	    addr5.setPreferredSize(new Dimension(250, 30));
 	    addr5.setForeground(Color.BLACK);
+	    ok1.addActionListener(new BoutonListener());
+	    ok2.addActionListener(new BoutonListener());
+	    ok3.addActionListener(new BoutonListener());
+	    ok4.addActionListener(new BoutonListener());
+	    ok5.addActionListener(new BoutonListener());
 	    adressesPanel.add(adresses);
 	    adressesPanel.add(addr1);
+	    adressesPanel.add(ok1);
 	    adressesPanel.add(addr2);
+	    adressesPanel.add(ok2);
 	    adressesPanel.add(addr3);
+	    adressesPanel.add(ok3);
 	    adressesPanel.add(addr4);
+	    adressesPanel.add(ok4);
 	    adressesPanel.add(addr5);
+	    adressesPanel.add(ok5);
 	    container.add(adressesPanel);
 	    
 	    bouton.addActionListener(new BoutonListener());
@@ -138,35 +154,70 @@ public class Interface extends JFrame {
 		return date; 
 	}
 	
+	
 	public class StateListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-		      System.out.println("source : " + ((JCheckBox)e.getSource()).getText() + " - état : " + ((JCheckBox)e.getSource()).isSelected());
+			// On ajoute les preferences de l'utilisateur
+				if(((JCheckBox)e.getSource()).isSelected() == true) {
+					u.ajoutPreference(((JCheckBox)e.getSource()).getText());
+					u.affiche(u.preferences);
+				}
+				else if(((JCheckBox)e.getSource()).isSelected() == false) {
+					u.supprimePreference(((JCheckBox)e.getSource()).getText());
+					u.affiche(u.preferences);
+				}
 		    }
 
 	}
 	class BoutonListener implements ActionListener {
 	    public void actionPerformed(ActionEvent e) {
-	      System.out.println("Valider");
-	      JFrame f = new JFrame();
-	      f.setTitle("Merci de patienter...");
-	      f.setSize(800, 200);
-	      f.setLocationRelativeTo(null);
+	      if (e.getSource() == ok1){
+	    	  u.ajoutAdresse(addr1.getText());
+	    	  u.affiche(u.adresses);
+	    	  System.out.println("addr1");
+	      }
+	      if (e.getSource() == ok2){
+	    	  u.ajoutAdresse(addr2.getText());
+	    	  u.affiche(u.adresses);
+	      }
+	      if (e.getSource() == ok3){
+	    	  u.ajoutAdresse(addr2.getText());
+	    	  u.affiche(u.adresses);
+	      }
+	      if (e.getSource() == ok4){
+	    	  u.ajoutAdresse(addr2.getText());
+	    	  u.affiche(u.adresses);
+	      }
+	      if (e.getSource() == ok5){
+	    	  u.ajoutAdresse(addr2.getText());
+	    	  u.affiche(u.adresses);
+	      }
 	      
-	      /*setContentPane(buildContentPane());
+	      if (e.getSource() == bouton) {
+	    	  System.out.println("Valider");
+		      JFrame f = new JFrame();
+		      f.setTitle("Merci de patienter...");
+		      f.setSize(800, 200);
+		      f.setLocationRelativeTo(null);
+		      
+		      /*setContentPane(buildContentPane());
+		      
+		    private JPanel buildContentPane(){
+		    	JPanel panel = new JPanel();
+			    panel.setLayout(new FlowLayout());
+			    JLabel label = new JLabel("Merci de patienter...");
+			    panel.add(label);
+			    return panel;
+		    }*/
+		      f.setVisible(true);
+	      }
 	      
-	    private JPanel buildContentPane(){
-	    	JPanel panel = new JPanel();
-		    panel.setLayout(new FlowLayout());
-		    JLabel label = new JLabel("Merci de patienter...");
-		    panel.add(label);
-		    return panel;
-	    }*/
-	      f.setVisible(true);
 	    }
 	}
 
 	public static void main(String[] args) {
+		
 		Interface fenetre = new Interface();
 	}
 
