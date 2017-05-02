@@ -5,18 +5,19 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
+
 import javax.swing.*;
 
 public class Interface extends JFrame {
-	Utilisateur u = new Utilisateur();
+	private Utilisateur u = new Utilisateur();
 	private JPanel container = new JPanel();
 	String[] tabJour = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16",
 			"17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};			
-	String[] tabMois = {"Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre"};
+	//String[] tabMois = {"Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre"};
+	String[] tabMois = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
 	String[] tabHoraire = {"16h", "17h", "18h", "19h", "20h", "21h", "22h", "23h", "00h", "1h", "2h"};
 	String[] tabTransport = {"Marche", "Vélo", "Voiture", "Transports en commun"};
 	private JCheckBox check1 = new JCheckBox("Végétarien");
@@ -60,31 +61,40 @@ public class Interface extends JFrame {
 
 		container.setBackground(Color.white);
 		
+		// Initialisation des comboBox
 		container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
 		comboJour.setPreferredSize(new Dimension(100, 20));
 		comboMois.setPreferredSize(new Dimension(120, 20));
 		comboHoraire.setPreferredSize(new Dimension(100, 20));
-		comboTransport.setPreferredSize(new Dimension(200, 20));
+		comboTransport.setPreferredSize(new Dimension(120, 20));
 		
+		/** ComboBox pour la date **/
 		JPanel datePanel = new JPanel();
 		datePanel.add(jour);
 		datePanel.add(comboJour);
 		datePanel.add(mois);
 		datePanel.add(comboMois);
 		container.add(datePanel);
+		//Ajout du listener
+	    comboJour.addItemListener(new ItemState());
+	    comboMois.addItemListener(new ItemState());
 
+		/** ComboBox pour l'horaire **/
 		JPanel horairePanel = new JPanel();
 		horairePanel.add(horaire);
 		horairePanel.add(comboHoraire);
 		container.add(horairePanel);
-		//container.add(horairePanel, FlowLayout.CENTER);
+		// Ajout du listener
+		comboHoraire.addItemListener(new ItemState());
 		
+		// ComboBox pour le transport
 		JPanel transportPanel = new JPanel();
 		transportPanel.add(transport);
 		transportPanel.add(comboTransport);
 		container.add(transportPanel);
 		//	container.add(transportPanel, FlowLayout.CENTER);
 		
+		// CheckBox pour les préférences alimentaires 
 		JPanel preferencesPanel = new JPanel();
 		check1.addActionListener(new StateListener());
 	    check2.addActionListener(new StateListener());
@@ -103,6 +113,7 @@ public class Interface extends JFrame {
 	    preferencesPanel.add(check7);
 	    container.add(preferencesPanel);
 	    
+	    // TextBox pour les adresses
 	    JPanel adressesPanel = new JPanel();
 	    Font police = new Font("Arial", Font.BOLD, 14);
 	    addr1.setFont(police);
@@ -120,12 +131,12 @@ public class Interface extends JFrame {
 	    addr5.setFont(police);
 	    addr5.setPreferredSize(new Dimension(250, 30));
 	    addr5.setForeground(Color.BLACK);
+	    adressesPanel.add(adresses);
 	    ok1.addActionListener(new BoutonListener());
 	    ok2.addActionListener(new BoutonListener());
 	    ok3.addActionListener(new BoutonListener());
 	    ok4.addActionListener(new BoutonListener());
 	    ok5.addActionListener(new BoutonListener());
-	    adressesPanel.add(adresses);
 	    adressesPanel.add(addr1);
 	    adressesPanel.add(ok1);
 	    adressesPanel.add(addr2);
@@ -138,6 +149,7 @@ public class Interface extends JFrame {
 	    adressesPanel.add(ok5);
 	    container.add(adressesPanel);
 	    
+	    // Bouton de validation
 	    bouton.addActionListener(new BoutonListener());
 	    JPanel validerPanel = new JPanel();
 	    validerPanel.add(bouton);
@@ -147,26 +159,20 @@ public class Interface extends JFrame {
 		this.setVisible(true);
 	}
 	
-	public SimpleDateFormat getDate(){
-		String jour = (String) comboJour.getSelectedItem();
-		String mois = (String) comboMois.getSelectedItem();
-		SimpleDateFormat date = new SimpleDateFormat();
-		return date; 
-	}
-	
-	
 	public class StateListener implements ActionListener {
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(ActionEvent e) {			
 			// On ajoute les preferences de l'utilisateur
-				if(((JCheckBox)e.getSource()).isSelected() == true) {
-					u.ajoutPreference(((JCheckBox)e.getSource()).getText());
-					u.affiche(u.preferences);
-				}
-				else if(((JCheckBox)e.getSource()).isSelected() == false) {
-					u.supprimePreference(((JCheckBox)e.getSource()).getText());
-					u.affiche(u.preferences);
-				}
+			if(((JCheckBox)e.getSource()).isSelected() == true) {
+				u.ajoutPreference(((JCheckBox)e.getSource()).getText());
+				u.affichePreferences(u.preferences);
+			}
+			else if(((JCheckBox)e.getSource()).isSelected() == false) {
+				u.supprimePreference(((JCheckBox)e.getSource()).getText());
+				u.affichePreferences(u.preferences);
+			}
+			
+		//	System.out.println("source : " + ((JCheckBox)e.getSource()).getText() + " - état : " + ((JCheckBox)e.getSource()).isSelected());
 		    }
 
 	}
@@ -174,24 +180,23 @@ public class Interface extends JFrame {
 	    public void actionPerformed(ActionEvent e) {
 	      if (e.getSource() == ok1){
 	    	  u.ajoutAdresse(addr1.getText());
-	    	  u.affiche(u.adresses);
-	    	  System.out.println("addr1");
+	    	  u.afficheAdresses(u.adresses);
 	      }
 	      if (e.getSource() == ok2){
 	    	  u.ajoutAdresse(addr2.getText());
-	    	  u.affiche(u.adresses);
+	    	  u.afficheAdresses(u.adresses);
 	      }
 	      if (e.getSource() == ok3){
 	    	  u.ajoutAdresse(addr2.getText());
-	    	  u.affiche(u.adresses);
+	    	  u.afficheAdresses(u.adresses);
 	      }
 	      if (e.getSource() == ok4){
 	    	  u.ajoutAdresse(addr2.getText());
-	    	  u.affiche(u.adresses);
+	    	  u.afficheAdresses(u.adresses);
 	      }
 	      if (e.getSource() == ok5){
 	    	  u.ajoutAdresse(addr2.getText());
-	    	  u.affiche(u.adresses);
+	    	  u.afficheAdresses(u.adresses);
 	      }
 	      
 	      if (e.getSource() == bouton) {
@@ -215,10 +220,35 @@ public class Interface extends JFrame {
 	      
 	    }
 	}
+	
+	/** // Ajouter la date et l'horaire de début 
+			String jour = (String) comboJour.getSelectedItem();
+			String mois = (String) comboMois.getSelectedItem();
+			String dateStr = jour+"/"+mois+"/2017";
+			SimpleDateFormat date = new SimpleDateFormat(dateStr);
+			u.ajoutDateEtHoraire(date, comboHoraire.getSelectedIndex());
+			u.afficheDateEtHoraire(date, comboHoraire.getSelectedIndex());
+			**/
+	
+	class ItemState implements ItemListener{
+	    public void itemStateChanged(ItemEvent e) {
+	    	
+	    	// Ajouter la date et l'horaire de début
+	    	if (e.getSource() == comboJour || e.getSource() == comboMois || e.getSource() == comboHoraire){
+	    		String jour = (String) comboJour.getSelectedItem();
+	    		String mois = (String) comboMois.getSelectedItem();
+	    		String dateStr = jour+"/"+mois+"/2017";
+	    		SimpleDateFormat date = new SimpleDateFormat(dateStr);
+	    	//	u.ajoutDateEtHoraire(date, comboHoraire.getSelectedIndex());
+				u.afficheDateEtHoraire(date, comboHoraire.getSelectedIndex());
+	    	}
+	     // System.out.println("événement déclenché sur : " + e.getItem());
+	    }               
+	  }
 
 	public static void main(String[] args) {
-		
 		Interface fenetre = new Interface();
+		
 	}
 
 }
