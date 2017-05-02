@@ -89,12 +89,13 @@ public class Interface extends JFrame {
 		// Ajout du listener
 		comboHoraire.addItemListener(new ItemState());
 		
-		// ComboBox pour le transport
+		/** ComboBox pour le transport **/
 		JPanel transportPanel = new JPanel();
 		transportPanel.add(transport);
 		transportPanel.add(comboTransport);
 		container.add(transportPanel);
-		//	container.add(transportPanel, FlowLayout.CENTER);
+		// Ajout du listener
+		comboTransport.addItemListener(new ItemState());
 		
 		// CheckBox pour les préférences alimentaires 
 		JPanel preferencesPanel = new JPanel();
@@ -223,14 +224,6 @@ public class Interface extends JFrame {
 	    }
 	}
 	
-	/** // Ajouter la date et l'horaire de début 
-			String jour = (String) comboJour.getSelectedItem();
-			String mois = (String) comboMois.getSelectedItem();
-			String dateStr = jour+"/"+mois+"/2017";
-			SimpleDateFormat date = new SimpleDateFormat(dateStr);
-			u.ajoutDateEtHoraire(date, comboHoraire.getSelectedIndex());
-			u.afficheDateEtHoraire(date, comboHoraire.getSelectedIndex());
-			**/
 	
 	class ItemState implements ItemListener{
 	    public void itemStateChanged(ItemEvent e) {
@@ -243,7 +236,13 @@ public class Interface extends JFrame {
 	    		SimpleDateFormat date = new SimpleDateFormat(dateStr);
 	    		String horaire = (String) comboHoraire.getSelectedItem();
 	    		u.ajoutDateEtHoraire(date, horaire);
-				u.afficheDateEtHoraire(date, horaire);
+				u.afficheDateEtHoraire();
+	    	} 
+	    	// Ajouter le transport 
+	    	else {
+	    		String transport = (String) comboTransport.getSelectedItem();
+	    		u.ajoutTransport(transport);
+	    		u.afficheTransport();
 	    	}
 	     // System.out.println("événement déclenché sur : " + e.getItem());
 	    }               
