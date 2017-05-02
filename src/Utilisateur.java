@@ -1,27 +1,20 @@
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Utilisateur {
 	
 	
-	public enum TypeTransport{
-		Marche, Velo, Voiture, TransportCommun;
-	}
-	
-	public enum TypeResto{
-		Vegetarien, Grec, Italien, Burger;
-	}
-	
-	public ArrayList<String> adresses;
-	public Date date;
-	public int horaireDebut;
-	public ArrayList<TypeResto> preferences;
-	public TypeTransport transport;
+	public ArrayList<String> adresses = new ArrayList<String>();
+	public SimpleDateFormat date;
+	public String horaireDebut;
+	public ArrayList<String> preferences = new ArrayList<String>();
+	public String transport;
 	public int nbMaxPers;
 	
 	public Utilisateur(){}
 	
-	public void ajoutDateEtHoraire(Date d, int h){
+	public void ajoutDateEtHoraire(SimpleDateFormat d, String h){
 		this.date = d;
 		this.horaireDebut = h;
 	}
@@ -34,11 +27,15 @@ public class Utilisateur {
 		this.adresses.remove(a);
 	}
 	
-	public void ajoutTransport(TypeTransport t){
+	public void ajoutTransport(String t){
 		this.transport = t;
 	}
 	
-	public void ajoutPreference(TypeResto p){
+	public void ajoutPreference(String p){
+		this.preferences.add(p);
+	}
+	
+	public void supprimePreference(String p){
 		this.preferences.add(p);
 	}
 	
