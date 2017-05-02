@@ -3,6 +3,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -134,6 +136,23 @@ public class Interface extends JFrame {
 		String mois = (String) comboMois.getSelectedItem();
 		SimpleDateFormat date = new SimpleDateFormat();
 		return date; 
+	}
+	
+	public class StateListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+		      System.out.println("source : " + ((JCheckBox)e.getSource()).getText() + " - état : " + ((JCheckBox)e.getSource()).isSelected());
+		    }
+
+	}
+	public class BoutonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			 System.out.println("Valider");
+
+		}
 	}
 
 	public static void main(String[] args) {
