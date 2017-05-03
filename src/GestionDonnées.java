@@ -1,4 +1,4 @@
-iimport java.net.URL;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Scanner;
 
