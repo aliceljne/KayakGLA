@@ -6,7 +6,7 @@ import org.json.*;
 
 public class GestionDonnees {
 
-	String jsonToGoogle;
+	public static Utilisateur u = new Utilisateur();
 	public static double[] coordLat = new double[5];
 	public static double[] coordLng = new double[5];
 	public static double centerLat = 48.85340329999999;
@@ -14,7 +14,7 @@ public class GestionDonnees {
 	JSONObject bars;
 	JSONObject restos;
 	JSONObject boites;
-	int compteurRecherche = 1;
+	int compteurRecherche = 0;
 	private static String GooglePlacesKey = "AIzaSyCTkWzHYYQvnC4no8p54GI2vXEqO5IljoE";
 
 	public GestionDonnees() {
@@ -55,33 +55,52 @@ public class GestionDonnees {
 
 		System.out.println("lat: " + loc.getDouble("lat") + ", lng: " + loc.getDouble("lng"));
 	}
-	
-	public static void getCenterCoord(){
+
+	public static void getCenterCoord() {
 		double sommeLat = 0;
 		double sommeLng = 0;
 		double countLat = 0;
 		double countLng = 0;
-		
-		for (int i=0; i<5; i++){
-			if (coordLat[i] != 0 || coordLng[i] != 0){
+
+		for (int i = 0; i < 5; i++) {
+			if (coordLat[i] != 0 || coordLng[i] != 0) {
 				sommeLat += coordLat[i];
-				countLat ++;
+				countLat++;
 				sommeLng += coordLng[i];
-				countLng ++;
-			} 
+				countLng++;
+			}
 		}
-		if (countLat != 0 && countLng != 0){
+		if (countLat != 0 && countLng != 0) {
 			centerLat = sommeLat / countLat;
 			centerLng = sommeLng / countLng;
 		}
-		
+
 		System.out.println("centerLat : " + centerLat);
 		System.out.println("centerLng : " + centerLng);
 	}
+	
+	public static void getBarycentre(){
+		int numAddr = 1;
+		for(String addr : u.adresses){
+			try {
+				GestionDonnees.addrToCoord(addr, numAddr);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			numAddr++;
+		}
+		for (int i = 0; i < GestionDonnees.coordLat.length; i++) {
+			System.out.println("Lat : " + coordLat[i]);
+			System.out.println("Lng : " + coordLng[i]);
+		}
+		getCenterCoord();
+	}
 
-	public static void NearbySearchBar(double Lat, double Lng) throws Exception{
+	public static void NearbySearchBar(double Lat, double Lng) throws Exception {
 
-		String s = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+Lat+","+Lng+"+&radius=500&type=restaurant&name=Burger&key="+GooglePlacesKey;
+		String s = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + Lat + "," + Lng
+				+ "+&radius=500&type=restaurant&name=Burger&key=" + GooglePlacesKey;
 		URL url = new URL(s);
 		boolean b = false; // booléen temporaire
 		// read from the URL
@@ -95,43 +114,41 @@ public class GestionDonnees {
 		JSONObject obj = new JSONObject(str);
 		if (!obj.getString("status").equals("OK"))
 			return;
-		int i =0;
-		while(b == false || i < obj.getJSONArray("results").length()){
-			JSONObject lieu = (obj.getJSONArray("results")).getJSONObject (i);
+		int i = 0;
+		while (b == false || i < obj.getJSONArray("results").length()) {
+			JSONObject lieu = (obj.getJSONArray("results")).getJSONObject(i);
 			// add fonction demander à l'utilisateur si le lieu lui convient
 			i++;
-			
+
 		}
 	}
-	
 
 	public static void main(String[] args) throws Exception {
-		 Interface fenetre = new Interface();
-
+		Interface fenetre = new Interface();
+		
 		// Proxy du PUIO
 		System.setProperty("https.proxyHost", "cache.u-psud.fr");
 		System.setProperty("https.proxyPort", "8080");
 
-	/**	String addr1 = "116 rue Réaumur, 75002, Paris";
-		addrToCoord(addr1, 1);
-		String addr2 = "Rue de l'Inquisition 2, 1000 Bruxelles, Belgique";
-		addrToCoord(addr2,2);
-		String addr3 = "Calle Rio Azuer, 45007 Toledo, Espagne";
-		addrToCoord(addr3,3);**/
-		
-	/**	int numAddr = 0;
-		for(String addr : fenetre.u.adresses){
-			addrToCoord(addr, numAddr);
-			numAddr++;
-		}**/
-		
-	/**	for (int i = 0; i < coordLat.length; i++) {
-			System.out.println("Lat : " + coordLat[i]);
-			System.out.println("Lng : " + coordLng[i]);
-		}**/
+		/**
+		 * String addr1 = "116 rue Réaumur, 75002, Paris"; addrToCoord(addr1,
+		 * 1); String addr2 = "Rue de l'Inquisition 2, 1000 Bruxelles, Belgique"
+		 * ; addrToCoord(addr2,2); String addr3 =
+		 * "Calle Rio Azuer, 45007 Toledo, Espagne"; addrToCoord(addr3,3);
+		 **/
 
-		//getCenterCoord();
-		
+		/**
+		 * int numAddr = 0; for(String addr : fenetre.u.adresses){
+		 * addrToCoord(addr, numAddr); numAddr++; }
+		 **/
+
+		/**
+		 * for (int i = 0; i < coordLat.length; i++) { System.out.println(
+		 * "Lat : " + coordLat[i]); System.out.println("Lng : " + coordLng[i]);
+		 * }
+		 **/
+
+		// getCenterCoord();
 		
 
 	}
