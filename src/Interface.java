@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -10,10 +9,9 @@ import java.awt.event.ItemListener;
 import java.text.SimpleDateFormat;
 
 import javax.swing.*;
-import javax.swing.text.MaskFormatter;
 
 public class Interface extends JFrame {
-	public Utilisateur u = new Utilisateur();
+//	public Utilisateur u = new Utilisateur();
 	private JPanel container = new JPanel();
 	String[] tabJour = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17",
 			"18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" };
@@ -56,6 +54,7 @@ public class Interface extends JFrame {
 	private JButton sup3 = new JButton("-");
 	private JButton sup4 = new JButton("-");
 	private JButton sup5 = new JButton("-");
+	private JButton ok = new JButton("Compris!");
 
 	public Interface() {
 		// On nomme la fenetre
@@ -75,17 +74,17 @@ public class Interface extends JFrame {
 		comboMois.setPreferredSize(new Dimension(120, 20));
 		comboHoraire.setPreferredSize(new Dimension(100, 20));
 		comboTransport.setPreferredSize(new Dimension(120, 20));
-		ok1.setPreferredSize(new Dimension(30,20));
-		ok2.setPreferredSize(new Dimension(30,20));
-		ok3.setPreferredSize(new Dimension(30,20));
-		ok4.setPreferredSize(new Dimension(30,20));
-		ok5.setPreferredSize(new Dimension(30,20));
-		sup1.setPreferredSize(new Dimension(30,20));
-		sup2.setPreferredSize(new Dimension(30,20));
-		sup3.setPreferredSize(new Dimension(30,20));
-		sup4.setPreferredSize(new Dimension(30,20));
-		sup5.setPreferredSize(new Dimension(30,20));
-		
+		ok1.setPreferredSize(new Dimension(30, 20));
+		ok2.setPreferredSize(new Dimension(30, 20));
+		ok3.setPreferredSize(new Dimension(30, 20));
+		ok4.setPreferredSize(new Dimension(30, 20));
+		ok5.setPreferredSize(new Dimension(30, 20));
+		sup1.setPreferredSize(new Dimension(30, 20));
+		sup2.setPreferredSize(new Dimension(30, 20));
+		sup3.setPreferredSize(new Dimension(30, 20));
+		sup4.setPreferredSize(new Dimension(30, 20));
+		sup5.setPreferredSize(new Dimension(30, 20));
+
 		/** ComboBox pour la date **/
 		JPanel datePanel = new JPanel();
 		datePanel.add(jour);
@@ -187,6 +186,7 @@ public class Interface extends JFrame {
 
 		this.setContentPane(container);
 		this.setVisible(true);
+
 	}
 
 	public class StateListener implements ActionListener {
@@ -194,11 +194,11 @@ public class Interface extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			// On ajoute les preferences de l'utilisateur
 			if (((JCheckBox) e.getSource()).isSelected() == true) {
-				u.ajoutPreference(((JCheckBox) e.getSource()).getText());
-				u.affichePreferences(u.preferences);
+				GestionDonnees.u.ajoutPreference(((JCheckBox) e.getSource()).getText());
+				GestionDonnees.u.affichePreferences(GestionDonnees.u.preferences);
 			} else if (((JCheckBox) e.getSource()).isSelected() == false) {
-				u.supprimePreference(((JCheckBox) e.getSource()).getText());
-				u.affichePreferences(u.preferences);
+				GestionDonnees.u.supprimePreference(((JCheckBox) e.getSource()).getText());
+				GestionDonnees.u.affichePreferences(GestionDonnees.u.preferences);
 			}
 
 			// System.out.println("source : " +
@@ -206,80 +206,6 @@ public class Interface extends JFrame {
 			// ((JCheckBox)e.getSource()).isSelected());
 		}
 
-	}
-
-	class BoutonListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			
-			// Ajout des adresses 
-			if (e.getSource() == ok1) {
-				u.ajoutAdresse(addr1.getText());
-				u.afficheAdresses(u.adresses);
-			}
-			if (e.getSource() == ok2) {
-				u.ajoutAdresse(addr2.getText());
-				u.afficheAdresses(u.adresses);
-			}
-			if (e.getSource() == ok3) {
-				u.ajoutAdresse(addr2.getText());
-				u.afficheAdresses(u.adresses);
-			}
-			if (e.getSource() == ok4) {
-				u.ajoutAdresse(addr2.getText());
-				u.afficheAdresses(u.adresses);
-			}
-			if (e.getSource() == ok5) {
-				u.ajoutAdresse(addr2.getText());
-				u.afficheAdresses(u.adresses);
-			}
-			
-			// Suppression des adresses
-			
-			if (e.getSource() == sup1) {
-				u.supprimerAdresse(addr1.getText());
-				addr1.setText("");
-				u.afficheAdresses(u.adresses);
-			}
-			if (e.getSource() == sup2) {
-				u.supprimerAdresse(addr2.getText());
-				u.afficheAdresses(u.adresses);
-				addr2.setText("");
-			}
-			if (e.getSource() == sup3) {
-				u.supprimerAdresse(addr3.getText());
-				u.afficheAdresses(u.adresses);
-				addr3.setText("");
-			}
-			if (e.getSource() == sup4) {
-				u.supprimerAdresse(addr4.getText());
-				addr3.setText("");
-				u.afficheAdresses(u.adresses);
-			}
-			if (e.getSource() == sup5) {
-				u.supprimerAdresse(addr5.getText());
-				addr5.setText("");
-				u.afficheAdresses(u.adresses);
-			}
-
-			if (e.getSource() == bouton) {
-				JFrame f = new JFrame();
-				f.setTitle("Merci de patienter...");
-				f.setSize(800, 200);
-				f.setLocationRelativeTo(null);
-
-				/*
-				 * setContentPane(buildContentPane());
-				 * 
-				 * private JPanel buildContentPane(){ JPanel panel = new
-				 * JPanel(); panel.setLayout(new FlowLayout()); JLabel label =
-				 * new JLabel("Merci de patienter..."); panel.add(label); return
-				 * panel; }
-				 */
-
-				f.setVisible(true);
-			}
-
-		}
 	}
 
 	class ItemState implements ItemListener {
@@ -292,20 +218,113 @@ public class Interface extends JFrame {
 				String dateStr = jour + "/" + mois + "/2017";
 				SimpleDateFormat date = new SimpleDateFormat(dateStr);
 				String horaire = (String) comboHoraire.getSelectedItem();
-				u.ajoutDateEtHoraire(date, horaire);
-				u.afficheDateEtHoraire();
+				GestionDonnees.u.ajoutDateEtHoraire(date, horaire);
+				GestionDonnees.u.afficheDateEtHoraire();
 			}
-			
+
 			// Ajouter le transport
 			else {
 				String transport = (String) comboTransport.getSelectedItem();
-				u.ajoutTransport(transport);
-				u.afficheTransport();
-				u.definitionPerimetreMax(transport);
-				System.out.println(u.perimetre);
+				GestionDonnees.u.ajoutTransport(transport);
+				GestionDonnees.u.afficheTransport();
+				GestionDonnees.u.definitionPerimetreMax(transport);
+				System.out.println(GestionDonnees.u.perimetre);
 			}
 		}
 	}
 
+	class BoutonListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+
+			// Ajout des adresses
+			if (e.getSource() == ok1) {
+				GestionDonnees.u.ajoutAdresse(addr1.getText());
+				GestionDonnees.u.afficheAdresses(GestionDonnees.u.adresses);
+			}
+			if (e.getSource() == ok2) {
+				GestionDonnees.u.ajoutAdresse(addr2.getText());
+				GestionDonnees.u.afficheAdresses(GestionDonnees.u.adresses);
+			}
+			if (e.getSource() == ok3) {
+				GestionDonnees.u.ajoutAdresse(addr3.getText());
+				GestionDonnees.u.afficheAdresses(GestionDonnees.u.adresses);
+			}
+			if (e.getSource() == ok4) {
+				GestionDonnees.u.ajoutAdresse(addr4.getText());
+				GestionDonnees.u.afficheAdresses(GestionDonnees.u.adresses);
+			}
+			if (e.getSource() == ok5) {
+				GestionDonnees.u.ajoutAdresse(addr5.getText());
+				GestionDonnees.u.afficheAdresses(GestionDonnees.u.adresses);
+			}
+
+			// Suppression des adresses
+
+			if (e.getSource() == sup1) {
+				GestionDonnees.u.supprimerAdresse(addr1.getText());
+				addr1.setText("");
+				GestionDonnees.u.afficheAdresses(GestionDonnees.u.adresses);
+			}
+			if (e.getSource() == sup2) {
+				GestionDonnees.u.supprimerAdresse(addr2.getText());
+				addr2.setText("");
+				GestionDonnees.u.afficheAdresses(GestionDonnees.u.adresses);
+			}
+			if (e.getSource() == sup3) {
+				GestionDonnees.u.supprimerAdresse(addr3.getText());
+				addr3.setText("");
+				GestionDonnees.u.afficheAdresses(GestionDonnees.u.adresses);
+			}
+			if (e.getSource() == sup4) {
+				GestionDonnees.u.supprimerAdresse(addr4.getText());
+				addr3.setText("");
+				GestionDonnees.u.afficheAdresses(GestionDonnees.u.adresses);
+			}
+			if (e.getSource() == sup5) {
+				GestionDonnees.u.supprimerAdresse(addr5.getText());
+				addr5.setText("");
+				GestionDonnees.u.afficheAdresses(GestionDonnees.u.adresses);
+			}
+
+			if (e.getSource() == bouton) {
+
+				container.setEnabled(false);
+				container.setVisible(false);
+
+				// Fenetre pour patienter
+				JFrame f = new JFrame();
+				f.setTitle("Kayak");
+				f.setSize(400, 100);
+				f.setLocationRelativeTo(null);
+
+				// Ecrire message d'attendre
+				JPanel panel = new JPanel();
+				panel.setLayout(new FlowLayout());
+				JLabel label = new JLabel("Merci de patienter...");
+				panel.add(label);
+
+				ok.addActionListener(new BoutonListener());
+				panel.add(ok);
+
+				f.add(panel);
+				f.setVisible(true);
+			}
+			if (e.getSource() == ok) {
+				// Calcule le barycentre des adresses
+				GestionDonnees.getBarycentre();
+				
+				try {
+					GestionDonnees.NearbySearchBar(GestionDonnees.centerLat, GestionDonnees.centerLng);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				System.exit(0);
+			}
+
+		}
+
+	}
 
 }
