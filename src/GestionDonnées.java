@@ -6,12 +6,11 @@ import org.json.*;
 
 public class GestionDonnees {
 
-	Utilisateur utilisateur;
 	String jsonToGoogle;
-	static double[] coordLat = new double[5];
-	static double[] coordLng = new double[5];
-	static double centerLat = 48.85340329999999;
-	static double centerLng = 2.3487835999999334;
+	public static double[] coordLat = new double[5];
+	public static double[] coordLng = new double[5];
+	public static double centerLat = 48.85340329999999;
+	public static double centerLng = 2.3487835999999334;
 	JSONObject bars;
 	JSONObject restos;
 	JSONObject boites;
@@ -58,10 +57,10 @@ public class GestionDonnees {
 	}
 	
 	public static void getCenterCoord(){
-		int sommeLat = 0;
-		int sommeLng = 0;
-		int countLat = 0;
-		int countLng = 0;
+		double sommeLat = 0;
+		double sommeLng = 0;
+		double countLat = 0;
+		double countLng = 0;
 		
 		for (int i=0; i<5; i++){
 			if (coordLat[i] != 0 || coordLng[i] != 0){
@@ -75,8 +74,11 @@ public class GestionDonnees {
 			centerLat = sommeLat / countLat;
 			centerLng = sommeLng / countLng;
 		}
+		
+		System.out.println("centerLat : " + centerLat);
+		System.out.println("centerLng : " + centerLng);
 	}
-	
+
 	public static void NearbySearchBar(double Lat, double Lng) throws Exception{
 
 		String s = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+Lat+","+Lng+"+&radius=500&type=restaurant&name=Burger&key="+GooglePlacesKey;
@@ -102,20 +104,36 @@ public class GestionDonnees {
 		}
 	}
 	
+
 	public static void main(String[] args) throws Exception {
-		 //Interface fenetre = new Interface();
+		 Interface fenetre = new Interface();
 
 		// Proxy du PUIO
 		System.setProperty("https.proxyHost", "cache.u-psud.fr");
 		System.setProperty("https.proxyPort", "8080");
 
+	/**	String addr1 = "116 rue Réaumur, 75002, Paris";
+		addrToCoord(addr1, 1);
+		String addr2 = "Rue de l'Inquisition 2, 1000 Bruxelles, Belgique";
+		addrToCoord(addr2,2);
+		String addr3 = "Calle Rio Azuer, 45007 Toledo, Espagne";
+		addrToCoord(addr3,3);**/
 		
-		  String addr = "213 rue de Versailles, 92410, Ville-d'Avray";
-		  addrToCoord(addr, 3);
-		  
-		  for(int i=0; i<coordLat.length; i++){ System.out.println("Lat : " +
-		  coordLat[i]); System.out.println("Lng : " + coordLng[i]); }
-		 
+	/**	int numAddr = 0;
+		for(String addr : fenetre.u.adresses){
+			addrToCoord(addr, numAddr);
+			numAddr++;
+		}**/
+		
+	/**	for (int i = 0; i < coordLat.length; i++) {
+			System.out.println("Lat : " + coordLat[i]);
+			System.out.println("Lng : " + coordLng[i]);
+		}**/
+
+		//getCenterCoord();
+		
+		
+
 	}
 
 }
