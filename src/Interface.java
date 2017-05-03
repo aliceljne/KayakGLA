@@ -13,7 +13,7 @@ import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 
 public class Interface extends JFrame {
-	private Utilisateur u = new Utilisateur();
+	public Utilisateur u = new Utilisateur();
 	private JPanel container = new JPanel();
 	String[] tabJour = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17",
 			"18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" };
@@ -236,28 +236,28 @@ public class Interface extends JFrame {
 			// Suppression des adresses
 			
 			if (e.getSource() == sup1) {
-				addr1.setText("");
 				u.supprimerAdresse(addr1.getText());
+				addr1.setText("");
 				u.afficheAdresses(u.adresses);
 			}
 			if (e.getSource() == sup2) {
-				addr2.setText("");
 				u.supprimerAdresse(addr2.getText());
 				u.afficheAdresses(u.adresses);
+				addr2.setText("");
 			}
 			if (e.getSource() == sup3) {
-				addr3.setText("");
 				u.supprimerAdresse(addr3.getText());
 				u.afficheAdresses(u.adresses);
+				addr3.setText("");
 			}
 			if (e.getSource() == sup4) {
-				addr4.setText("");
 				u.supprimerAdresse(addr4.getText());
+				addr3.setText("");
 				u.afficheAdresses(u.adresses);
 			}
 			if (e.getSource() == sup5) {
-				addr5.setText("");
 				u.supprimerAdresse(addr5.getText());
+				addr5.setText("");
 				u.afficheAdresses(u.adresses);
 			}
 
@@ -295,19 +295,21 @@ public class Interface extends JFrame {
 				u.ajoutDateEtHoraire(date, horaire);
 				u.afficheDateEtHoraire();
 			}
+			
 			// Ajouter le transport
 			else {
 				String transport = (String) comboTransport.getSelectedItem();
 				u.ajoutTransport(transport);
 				u.afficheTransport();
+				u.definitionPerimetreMax(transport);
+				System.out.println(u.perimetre);
 			}
-			// System.out.println("événement déclenché sur : " + e.getItem());
 		}
 	}
-
+	
 	public static void main(String[] args) {
 		Interface fenetre = new Interface();
-
 	}
+
 
 }
