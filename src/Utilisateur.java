@@ -10,7 +10,7 @@ public class Utilisateur {
 	public String horaireDebut;
 	public ArrayList<String> preferences = new ArrayList<String>();
 	public String transport;
-	double perimetre; // km
+	double perimetre; // en km
 	
 	public Utilisateur(){}
 	
@@ -42,16 +42,16 @@ public class Utilisateur {
 	// Méthode qui définit un périmètre 
 		public double definitionPerimetreMax(String t) {
 			if (t == "Marche") {
-				this.perimetre = 1;
+				this.perimetre = 1000;
 			} 
 			else if (t == "Vélo") {
-				this.perimetre = 3;
+				this.perimetre = 3000;
 			}  
 			else if (t == "Voiture") {
-				this.perimetre = 5;
+				this.perimetre = 5000;
 			} 
 			else if (t == "Transports en commun") {
-				this.perimetre = 8;
+				this.perimetre = 8000;
 			} 
 			return this.perimetre;
 		}
