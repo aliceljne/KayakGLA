@@ -77,7 +77,31 @@ public class GestionDonnees {
 		}
 	}
 	
+	public static void NearbySearchBar(double Lat, double Lng) throws Exception{
 
+		String s = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+Lat+","+Lng+"+&radius=500&type=restaurant&name=Burger&key="+GooglePlacesKey;
+		URL url = new URL(s);
+		boolean b = false; // booléen temporaire
+		// read from the URL
+		Scanner scan = new Scanner(url.openStream());
+		String str = new String();
+		while (scan.hasNext())
+			str += scan.nextLine();
+		scan.close();
+
+		// build a JSON object
+		JSONObject obj = new JSONObject(str);
+		if (!obj.getString("status").equals("OK"))
+			return;
+		int i =0;
+		while(b == false || i < obj.getJSONArray("results").length()){
+			JSONObject lieu = (obj.getJSONArray("results")).getJSONObject (i);
+			// add fonction demander à l'utilisateur si le lieu lui convient
+			i++;
+			
+		}
+	
+	
 	public static void main(String[] args) throws Exception {
 		 //Interface fenetre = new Interface();
 
