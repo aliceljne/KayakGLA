@@ -100,7 +100,7 @@ public class GestionDonnees {
 			i++;
 			
 		}
-	
+	}
 	
 	public static void main(String[] args) throws Exception {
 		 //Interface fenetre = new Interface();
