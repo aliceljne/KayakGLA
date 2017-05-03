@@ -306,10 +306,6 @@ public class Interface extends JFrame {
 			}
 		}
 	}
-	
-	public static void main(String[] args) {
-		Interface fenetre = new Interface();
-	}
 
 
 }
