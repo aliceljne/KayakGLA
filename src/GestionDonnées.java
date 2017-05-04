@@ -130,7 +130,6 @@ public class GestionDonnees {
 	}
 	
 	public static void NearbySearchResto(double Lat, double Lng) throws Exception {
-		compteurRecherche = 0;
 		String s = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + Lat + "," + Lng
 				+ "+&radius="+u.perimetre+"&type=restaurant&name="+u.preferences+"key=" + GooglePlacesKey;
 		URL url = new URL(s);
@@ -159,7 +158,6 @@ public class GestionDonnees {
 	}
 	
 	public static void NearbySearchBoite(double Lat, double Lng) throws Exception {
-		compteurRecherche = 0;
 		String s = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + Lat + "," + Lng
 				+ "+&radius="+u.perimetre+"&type=night_club&key=" + GooglePlacesKey;
 		URL url = new URL(s);
