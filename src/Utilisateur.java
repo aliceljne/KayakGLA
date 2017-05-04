@@ -8,7 +8,7 @@ public class Utilisateur {
 	public ArrayList<String> adresses = new ArrayList<String>();
 	public SimpleDateFormat date;
 	public String horaireDebut;
-	public ArrayList<String> preferences = new ArrayList<String>();
+	public String preference = new String();
 	public String transport;
 	double perimetre; // en km
 	
@@ -32,11 +32,11 @@ public class Utilisateur {
 	}
 	
 	public void ajoutPreference(String p){
-		this.preferences.add(p);
+		preference = p;
 	}
 	
-	public void supprimePreference(String p){
-		this.preferences.remove(p);
+	public void supprimePreference(){
+		preference = "";
 	}
 	
 	// Méthode qui définit un périmètre 
@@ -69,12 +69,8 @@ public class Utilisateur {
 	}
 	
 	// Affiche préférences
-	public void affichePreferences(ArrayList<String> a){
-		System.out.println("Préférences :");
-		for(String line : a){
-			System.out.println(line);
-		}
-		System.out.println("\n");
+	public void affichePreference(){
+		System.out.println("Préférences :" + this.preference);
 	}
 	
 	// Affiche adresses
