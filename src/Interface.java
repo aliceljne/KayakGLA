@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -19,6 +20,7 @@ public class Interface extends JFrame {
 	String[] tabMois = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" };
 	String[] tabHoraire = { "16", "17", "18", "19", "20", "21", "22", "23", "00", "1", "2" };
 	String[] tabTransport = { "Marche", "Vélo", "Voiture", "Transports en commun" };
+	private ButtonGroup GroupePreference = new ButtonGroup();
 	private JRadioButton bouton1 = new JRadioButton("Végétarien");
 	private JRadioButton bouton2 = new JRadioButton("Grec");
 	private JRadioButton bouton3 = new JRadioButton("Italien");
@@ -121,6 +123,13 @@ public class Interface extends JFrame {
 		bouton5.addActionListener(new StateListener());
 		bouton6.addActionListener(new StateListener());
 		bouton7.addActionListener(new StateListener());
+		GroupePreference.add(bouton1);
+		GroupePreference.add(bouton2);
+		GroupePreference.add(bouton3);
+		GroupePreference.add(bouton4);
+		GroupePreference.add(bouton5);
+		GroupePreference.add(bouton6);
+		GroupePreference.add(bouton7);
 		preferencesPanel.add(restos);
 		preferencesPanel.add(bouton1);
 		preferencesPanel.add(bouton2);
@@ -196,7 +205,7 @@ public class Interface extends JFrame {
 				GestionDonnees.u.ajoutPreference(((JRadioButton) e.getSource()).getText());
 				GestionDonnees.u.affichePreference();
 			} else if (((JRadioButton) e.getSource()).isSelected() == false) {
-				GestionDonnees.u.supprimePreference();
+				GestionDonnees.u.supprimePreference(((JRadioButton) e.getSource()).getText());
 				GestionDonnees.u.affichePreference();
 			}
 		}
