@@ -146,15 +146,45 @@ public class GestionDonnees {
 		if (!obj.getString("status").equals("OK"))
 			return;
 
-
-			JSONObject lieu = (obj.getJSONArray("results")).getJSONObject(compteurRecherche);
+		if (obj.length() == 0){
+			System.out.println("Pas de resto dans les environs");
+		} else{
+			JSONObject lieu = (obj.getJSONArray("results")).getJSONObject(compteurRecherche%obj.length());
 			//JSONObject photo = (lieu.getJSONArray("photos")).getJSONObject (compteurRecherche);
-			tripletBar[0] =   lieu.getString("name");
-			tripletBar[1] =   lieu.getString("vicinity");
-			//tripletBar[2] =   photo.getJSONArray("html_attributions");
+			tripletResto[0] =   lieu.getString("name");
+			tripletResto[1] =   lieu.getString("vicinity");
+			//tripletResto[2] =   photo.getJSONArray("html_attributions");
+			compteurRecherche++;
+		}
+	}
+	
+	public static void NearbySearchBoite(double Lat, double Lng) throws Exception {
+		compteurRecherche = 0;
+		String s = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + Lat + "," + Lng
+				+ "+&radius="+u.perimetre+"&type=night_club&key=" + GooglePlacesKey;
+		URL url = new URL(s);
+		// read from the URL
+		Scanner scan = new Scanner(url.openStream());
+		String str = new String();
+		while (scan.hasNext())
+			str += scan.nextLine();
+		scan.close();
 
-		
-		
+		// build a JSON object
+		JSONObject obj = new JSONObject(str);
+		if (!obj.getString("status").equals("OK"))
+			return;
+
+		if (obj.length() == 0){
+			System.out.println("Pas de boîte dans les environs");
+		} else{
+			JSONObject lieu = (obj.getJSONArray("results")).getJSONObject(compteurRecherche%obj.length());
+			//JSONObject photo = (lieu.getJSONArray("photos")).getJSONObject (compteurRecherche);
+			tripletBoite[0] =   lieu.getString("name");
+			tripletBoite[1] =   lieu.getString("vicinity");
+			//tripletBar[2] =   photo.getJSONArray("html_attributions");
+			compteurRecherche++;
+		}
 	}
 
 	public static void main(String[] args) throws Exception {
