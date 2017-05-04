@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.SimpleDateFormat;
-
 import javax.swing.*;
 
 public class Interface extends JFrame {
@@ -20,13 +19,13 @@ public class Interface extends JFrame {
 	String[] tabMois = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" };
 	String[] tabHoraire = { "16", "17", "18", "19", "20", "21", "22", "23", "00", "1", "2" };
 	String[] tabTransport = { "Marche", "Vélo", "Voiture", "Transports en commun" };
-	private JCheckBox check1 = new JCheckBox("Végétarien");
-	private JCheckBox check2 = new JCheckBox("Grec");
-	private JCheckBox check3 = new JCheckBox("Italien");
-	private JCheckBox check4 = new JCheckBox("Burger");
-	private JCheckBox check5 = new JCheckBox("Japonais");
-	private JCheckBox check6 = new JCheckBox("Chinois");
-	private JCheckBox check7 = new JCheckBox("Portugais");
+	private JRadioButton bouton1 = new JRadioButton("Végétarien");
+	private JRadioButton bouton2 = new JRadioButton("Grec");
+	private JRadioButton bouton3 = new JRadioButton("Italien");
+	private JRadioButton bouton4 = new JRadioButton("Burger");
+	private JRadioButton bouton5 = new JRadioButton("Japonais");
+	private JRadioButton bouton6 = new JRadioButton("Chinois");
+	private JRadioButton bouton7 = new JRadioButton("Portugais");
 	private JComboBox comboJour = new JComboBox(tabJour);
 	private JComboBox comboMois = new JComboBox(tabMois);
 	private JComboBox comboHoraire = new JComboBox(tabHoraire);
@@ -113,23 +112,23 @@ public class Interface extends JFrame {
 		// Ajout du listener
 		comboTransport.addItemListener(new ItemState());
 
-		// CheckBox pour les préférences alimentaires
+		// RadioButton pour les préférences alimentaires
 		JPanel preferencesPanel = new JPanel();
-		check1.addActionListener(new StateListener());
-		check2.addActionListener(new StateListener());
-		check3.addActionListener(new StateListener());
-		check4.addActionListener(new StateListener());
-		check5.addActionListener(new StateListener());
-		check6.addActionListener(new StateListener());
-		check7.addActionListener(new StateListener());
+		bouton1.addActionListener(new StateListener());
+		bouton2.addActionListener(new StateListener());
+		bouton3.addActionListener(new StateListener());
+		bouton4.addActionListener(new StateListener());
+		bouton5.addActionListener(new StateListener());
+		bouton6.addActionListener(new StateListener());
+		bouton7.addActionListener(new StateListener());
 		preferencesPanel.add(restos);
-		preferencesPanel.add(check1);
-		preferencesPanel.add(check2);
-		preferencesPanel.add(check3);
-		preferencesPanel.add(check4);
-		preferencesPanel.add(check5);
-		preferencesPanel.add(check6);
-		preferencesPanel.add(check7);
+		preferencesPanel.add(bouton1);
+		preferencesPanel.add(bouton2);
+		preferencesPanel.add(bouton3);
+		preferencesPanel.add(bouton4);
+		preferencesPanel.add(bouton5);
+		preferencesPanel.add(bouton6);
+		preferencesPanel.add(bouton7);
 		container.add(preferencesPanel);
 
 		// TextBox pour les adresses
@@ -192,18 +191,14 @@ public class Interface extends JFrame {
 	public class StateListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// On ajoute les preferences de l'utilisateur
-			if (((JCheckBox) e.getSource()).isSelected() == true) {
-				GestionDonnees.u.ajoutPreference(((JCheckBox) e.getSource()).getText());
-				GestionDonnees.u.affichePreferences(GestionDonnees.u.preferences);
-			} else if (((JCheckBox) e.getSource()).isSelected() == false) {
-				GestionDonnees.u.supprimePreference(((JCheckBox) e.getSource()).getText());
-				GestionDonnees.u.affichePreferences(GestionDonnees.u.preferences);
+			// On ajoute la preference de l'utilisateur
+			if (((JRadioButton) e.getSource()).isSelected() == true) {
+				GestionDonnees.u.ajoutPreference(((JRadioButton) e.getSource()).getText());
+				GestionDonnees.u.affichePreference();
+			} else if (((JRadioButton) e.getSource()).isSelected() == false) {
+				GestionDonnees.u.supprimePreference();
+				GestionDonnees.u.affichePreference();
 			}
-
-			// System.out.println("source : " +
-			// ((JCheckBox)e.getSource()).getText() + " - état : " +
-			// ((JCheckBox)e.getSource()).isSelected());
 		}
 
 	}
@@ -297,7 +292,7 @@ public class Interface extends JFrame {
 				f.setSize(400, 100);
 				f.setLocationRelativeTo(null);
 
-				// Ecrire message d'attendre
+				// Ecrire message d'attente
 				JPanel panel = new JPanel();
 				panel.setLayout(new FlowLayout());
 				JLabel label = new JLabel("Merci de patienter...");
@@ -322,6 +317,7 @@ public class Interface extends JFrame {
 				
 				System.exit(0);
 			}
+			
 
 		}
 
