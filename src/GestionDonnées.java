@@ -120,13 +120,40 @@ public class GestionDonnees {
 		if (!obj.getString("status").equals("OK"))
 			return;
 
-		while (boolBar == false || compteurRecherche < obj.getJSONArray("results").length()) {
+		
 			JSONObject lieu = (obj.getJSONArray("results")).getJSONObject(compteurRecherche);
 			tripletBar[0] =   lieu.getString("name");
 			tripletBar[1] =   lieu.getString("vicinity");
 			tripletBar[2] =   lieu.getString("photo_reference");
 			compteurRecherche++;
-		}
+		
+	}
+	
+	public static void NearbySearchResto(double Lat, double Lng) throws Exception {
+		compteurRecherche = 0;
+		String s = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + Lat + "," + Lng
+				+ "+&radius="+u.perimetre+"&type=restaurant&name="+u.preferences+"key=" + GooglePlacesKey;
+		URL url = new URL(s);
+		// read from the URL
+		Scanner scan = new Scanner(url.openStream());
+		String str = new String();
+		while (scan.hasNext())
+			str += scan.nextLine();
+		scan.close();
+
+		// build a JSON object
+		JSONObject obj = new JSONObject(str);
+		if (!obj.getString("status").equals("OK"))
+			return;
+
+
+			JSONObject lieu = (obj.getJSONArray("results")).getJSONObject(compteurRecherche);
+			//JSONObject photo = (lieu.getJSONArray("photos")).getJSONObject (compteurRecherche);
+			tripletBar[0] =   lieu.getString("name");
+			tripletBar[1] =   lieu.getString("vicinity");
+			//tripletBar[2] =   photo.getJSONArray("html_attributions");
+
+		
 		
 	}
 
