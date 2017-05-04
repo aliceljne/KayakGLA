@@ -123,7 +123,9 @@ public class GestionDonnees {
 			JSONObject lieu = (obj.getJSONArray("results")).getJSONObject(compteurRecherche);
 			//JSONObject photo = (lieu.getJSONArray("photos")).getJSONObject (compteurRecherche);
 			tripletBar[0] =   lieu.getString("name");
+			System.out.println(tripletBar[0]);
 			tripletBar[1] =   lieu.getString("vicinity");
+			System.out.println(tripletBar[1]);
 			//tripletBar[2] =   photo.getJSONArray("html_attributions");
 			compteurRecherche++;
 		}
@@ -146,10 +148,8 @@ public class GestionDonnees {
 		if (!obj.getString("status").equals("OK"))
 			return;
 
-		if (obj.length() == 0){
-			System.out.println("Pas de resto dans les environs");
-		} else{
-			JSONObject lieu = (obj.getJSONArray("results")).getJSONObject(compteurRecherche%obj.length());
+		if (compteurRecherche < obj.length()){
+			JSONObject lieu = (obj.getJSONArray("results")).getJSONObject(compteurRecherche);
 			//JSONObject photo = (lieu.getJSONArray("photos")).getJSONObject (compteurRecherche);
 			tripletResto[0] =   lieu.getString("name");
 			tripletResto[1] =   lieu.getString("vicinity");
@@ -174,10 +174,8 @@ public class GestionDonnees {
 		if (!obj.getString("status").equals("OK"))
 			return;
 
-		if (obj.length() == 0){
-			System.out.println("Pas de boîte dans les environs");
-		} else{
-			JSONObject lieu = (obj.getJSONArray("results")).getJSONObject(compteurRecherche%obj.length());
+		if (compteurRecherche < obj.length()){
+			JSONObject lieu = (obj.getJSONArray("results")).getJSONObject(compteurRecherche);
 			//JSONObject photo = (lieu.getJSONArray("photos")).getJSONObject (compteurRecherche);
 			tripletBoite[0] =   lieu.getString("name");
 			tripletBoite[1] =   lieu.getString("vicinity");
