@@ -1,11 +1,17 @@
-import java.net.URL;
+iimport java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.json.*;
 
 public class GestionDonnees {
-
+	public static String[] tripletBar = new String[3] ;
+	public static String[] tripletResto = new String[3] ;
+	public static String[] tripletBoite = new String[3] ;
+	public static boolean boolBar = false;
+	public static boolean boolresto = false;
+	public static boolean boolBoite = false;
 	public static Utilisateur u = new Utilisateur();
 	public static double[] coordLat = new double[5];
 	public static double[] coordLng = new double[5];
@@ -14,7 +20,7 @@ public class GestionDonnees {
 	JSONObject bars;
 	JSONObject restos;
 	JSONObject boites;
-	int compteurRecherche = 0;
+	static int compteurRecherche = 0;
 	private static String GooglePlacesKey = "AIzaSyCTkWzHYYQvnC4no8p54GI2vXEqO5IljoE";
 
 	public GestionDonnees() {
@@ -97,7 +103,7 @@ public class GestionDonnees {
 		getCenterCoord();
 	}
 
-		public static void NearbySearchBar(double Lat, double Lng) throws Exception {
+	public static void NearbySearchBar(double Lat, double Lng) throws Exception {
 
 		String s = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + Lat + "," + Lng
 				+ "+&radius=500&type=bar&key=" + GooglePlacesKey;
