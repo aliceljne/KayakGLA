@@ -103,7 +103,7 @@ public class GestionDonnees {
 		getCenterCoord();
 	}
 
-	ppublic static void NearbySearchBar(double Lat, double Lng) throws Exception {
+	public static void NearbySearchBar(double Lat, double Lng) throws Exception {
 		String s = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + Lat + "," + Lng
 				+ "+&radius="+u.perimetre+"&type=bar&key=" + GooglePlacesKey;
 		URL url = new URL(s);
