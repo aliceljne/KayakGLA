@@ -103,10 +103,9 @@ public class GestionDonnees {
 		getCenterCoord();
 	}
 
-	public static void NearbySearchBar(double Lat, double Lng) throws Exception {
-
+	ppublic static void NearbySearchBar(double Lat, double Lng) throws Exception {
 		String s = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + Lat + "," + Lng
-				+ "+&radius=500&type=bar&key=" + GooglePlacesKey;
+				+ "+&radius="+u.perimetre+"&type=bar&key=" + GooglePlacesKey;
 		URL url = new URL(s);
 		// read from the URL
 		Scanner scan = new Scanner(url.openStream());
@@ -120,12 +119,16 @@ public class GestionDonnees {
 		if (!obj.getString("status").equals("OK"))
 			return;
 
-		
-			JSONObject lieu = (obj.getJSONArray("results")).getJSONObject(compteurRecherche);
+		if (obj.length() == 0){
+			System.out.println("Pas de bar dans les environs");
+		} else{
+			JSONObject lieu = (obj.getJSONArray("results")).getJSONObject(compteurRecherche%obj.length());
+			//JSONObject photo = (lieu.getJSONArray("photos")).getJSONObject (compteurRecherche);
 			tripletBar[0] =   lieu.getString("name");
 			tripletBar[1] =   lieu.getString("vicinity");
-			tripletBar[2] =   lieu.getString("photo_reference");
+			//tripletBar[2] =   photo.getJSONArray("html_attributions");
 			compteurRecherche++;
+		}
 		
 	}
 	
