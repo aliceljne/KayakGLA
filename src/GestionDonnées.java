@@ -119,10 +119,8 @@ public class GestionDonnees {
 		if (!obj.getString("status").equals("OK"))
 			return;
 
-		if (obj.length() == 0){
-			System.out.println("Pas de bar dans les environs");
-		} else{
-			JSONObject lieu = (obj.getJSONArray("results")).getJSONObject(compteurRecherche%obj.length());
+		if (compteurRecherche < obj.length()){
+			JSONObject lieu = (obj.getJSONArray("results")).getJSONObject(compteurRecherche);
 			//JSONObject photo = (lieu.getJSONArray("photos")).getJSONObject (compteurRecherche);
 			tripletBar[0] =   lieu.getString("name");
 			tripletBar[1] =   lieu.getString("vicinity");
