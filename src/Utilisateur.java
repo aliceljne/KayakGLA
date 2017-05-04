@@ -35,8 +35,10 @@ public class Utilisateur {
 		preference = p;
 	}
 	
-	public void supprimePreference(){
-		preference = "";
+	public void supprimePreference(String p){
+		if(preference == p) {
+			preference = "";
+		}
 	}
 	
 	// Méthode qui définit un périmètre 
