@@ -204,9 +204,6 @@ public class Interface extends JFrame {
 			if (((JRadioButton) e.getSource()).isSelected() == true) {
 				GestionDonnees.u.ajoutPreference(((JRadioButton) e.getSource()).getText());
 				GestionDonnees.u.affichePreference();
-			} else if (((JRadioButton) e.getSource()).isSelected() == false) {
-				GestionDonnees.u.supprimePreference(((JRadioButton) e.getSource()).getText());
-				GestionDonnees.u.affichePreference();
 			}
 		}
 
@@ -324,9 +321,9 @@ public class Interface extends JFrame {
 					e1.printStackTrace();
 				}
 				
-				System.exit(0);
+				InterfaceBar rep = new InterfaceBar();
+		//		System.exit(0);
 			}
-			
 
 		}
 
