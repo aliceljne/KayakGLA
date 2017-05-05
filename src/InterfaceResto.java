@@ -35,11 +35,6 @@ public class InterfaceResto extends JFrame {
 		container.setBackground(Color.white);
 		container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
 
-		// Fenetre pour le resto
-		JFrame fResto = new JFrame();
-		fResto.setTitle("Kayak");
-		fResto.setSize(50, 50);
-		fResto.setLocationRelativeTo(null);
 
 		// Ecrire les informations du bar
 		JPanel panelResto = new JPanel();
@@ -66,22 +61,23 @@ public class InterfaceResto extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == nonResto) {
 				try {
-					GestionDonnees.NearbySearchBar(GestionDonnees.centerLat, GestionDonnees.centerLng);
+					GestionDonnees.NearbySearchResto(GestionDonnees.coordBar[0], GestionDonnees.coordBar[1]);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				container.setVisible(true);
+				container.setVisible(false);
 				InterfaceResto newF = new InterfaceResto();
 			}
 			if (e.getSource() == okResto) {
 				GestionDonnees.compteurRecherche = 0;
 				try {
-					GestionDonnees.NearbySearchBoite(GestionDonnees.centerLat, GestionDonnees.centerLng);
+					GestionDonnees.NearbySearchBoite(GestionDonnees.coordResto[0], GestionDonnees.coordResto[1]);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				InterfaceBoite newF = new InterfaceBoite();
 				container.setVisible(false);
 			}
 		}
