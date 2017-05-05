@@ -35,11 +35,6 @@ public class InterfaceBar extends JFrame {
 		container.setBackground(Color.white);
 		container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
 
-		// Fenetre pour le bar
-		JFrame fBar = new JFrame();
-		fBar.setTitle("Kayak");
-		fBar.setSize(50, 50);
-		fBar.setLocationRelativeTo(null);
 
 		// Ecrire les informations du bar
 		JPanel panelBar = new JPanel();
@@ -77,7 +72,7 @@ public class InterfaceBar extends JFrame {
 			if (e.getSource() == okBar) {
 				GestionDonnees.compteurRecherche = 0;
 				try {
-					GestionDonnees.NearbySearchResto(GestionDonnees.centerLat, GestionDonnees.centerLng);
+					GestionDonnees.NearbySearchResto(GestionDonnees.coordBar[0], GestionDonnees.coordBar[1]);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
