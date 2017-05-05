@@ -55,7 +55,6 @@ public class Interface extends JFrame {
 	private JButton sup3 = new JButton("-");
 	private JButton sup4 = new JButton("-");
 	private JButton sup5 = new JButton("-");
-	private JButton ok = new JButton("Compris!");
 
 	public Interface() {
 		// On nomme la fenetre
@@ -292,25 +291,6 @@ public class Interface extends JFrame {
 				container.setEnabled(false);
 				container.setVisible(false);
 
-				// Fenetre pour patienter
-				JFrame f = new JFrame();
-				f.setTitle("Kayak");
-				f.setSize(400, 100);
-				f.setLocationRelativeTo(null);
-
-				// Ecrire message d'attente
-				JPanel panel = new JPanel();
-				panel.setLayout(new FlowLayout());
-				JLabel label = new JLabel("Merci de patienter...");
-				panel.add(label);
-
-				ok.addActionListener(new BoutonListener());
-				panel.add(ok);
-
-				f.add(panel);
-				f.setVisible(true);
-			}
-			if (e.getSource() == ok) {
 				// Calcule le barycentre des adresses
 				GestionDonnees.getBarycentre();
 				
@@ -322,7 +302,6 @@ public class Interface extends JFrame {
 				}
 				
 				InterfaceBar rep = new InterfaceBar();
-		//		System.exit(0);
 			}
 
 		}
