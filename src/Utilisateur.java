@@ -8,9 +8,9 @@ public class Utilisateur {
 	public ArrayList<String> adresses = new ArrayList<String>();
 	public SimpleDateFormat date;
 	public String horaireDebut;
-	public String preference = new String();
+	public String preference;
 	public String transport;
-	double perimetre; // en km
+	double perimetre = 3000; // en m
 	
 	public Utilisateur(){}
 	
@@ -32,14 +32,9 @@ public class Utilisateur {
 	}
 	
 	public void ajoutPreference(String p){
-		preference = p;
+		this.preference = p;
 	}
-	
-	public void supprimePreference(String p){
-		if(preference == p) {
-			preference = "";
-		}
-	}
+
 	
 	// Méthode qui définit un périmètre 
 		public double definitionPerimetreMax(String t) {
@@ -72,7 +67,7 @@ public class Utilisateur {
 	
 	// Affiche préférences
 	public void affichePreference(){
-		System.out.println("Préférences :" + this.preference);
+		System.out.println("Préférence alimentaire : "+this.preference);
 	}
 	
 	// Affiche adresses
