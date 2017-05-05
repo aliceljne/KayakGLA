@@ -87,6 +87,7 @@ public class Interface extends JFrame {
 
 		/** ComboBox pour la date **/
 		JPanel datePanel = new JPanel();
+		datePanel.setBackground(Color.white);
 		datePanel.add(jour);
 		datePanel.add(comboJour);
 		datePanel.add(mois);
@@ -98,6 +99,7 @@ public class Interface extends JFrame {
 
 		/** ComboBox pour l'horaire **/
 		JPanel horairePanel = new JPanel();
+		horairePanel.setBackground(Color.white);
 		horairePanel.add(horaire);
 		horairePanel.add(comboHoraire);
 		horairePanel.add(heures);
@@ -107,6 +109,7 @@ public class Interface extends JFrame {
 
 		/** ComboBox pour le transport **/
 		JPanel transportPanel = new JPanel();
+		transportPanel.setBackground(Color.white);
 		transportPanel.add(transport);
 		transportPanel.add(comboTransport);
 		container.add(transportPanel);
@@ -115,6 +118,14 @@ public class Interface extends JFrame {
 
 		// RadioButton pour les préférences alimentaires
 		JPanel preferencesPanel = new JPanel();
+		preferencesPanel.setBackground(Color.white);
+		bouton1.setBackground(Color.white);
+		bouton2.setBackground(Color.white);
+		bouton3.setBackground(Color.white);
+		bouton4.setBackground(Color.white);
+		bouton5.setBackground(Color.white);
+		bouton6.setBackground(Color.white);
+		bouton7.setBackground(Color.white);
 		bouton1.addActionListener(new StateListener());
 		bouton2.addActionListener(new StateListener());
 		bouton3.addActionListener(new StateListener());
@@ -141,6 +152,7 @@ public class Interface extends JFrame {
 
 		// TextBox pour les adresses
 		JPanel adressesPanel = new JPanel();
+		adressesPanel.setBackground(Color.white);
 		Font police = new Font("Arial", Font.BOLD, 14);
 		addr1.setFont(police);
 		addr1.setPreferredSize(new Dimension(250, 30));
@@ -186,8 +198,9 @@ public class Interface extends JFrame {
 		container.add(adressesPanel);
 
 		// Bouton de validation
-		bouton.addActionListener(new BoutonListener());
 		JPanel validerPanel = new JPanel();
+		validerPanel.setBackground(Color.white);
+		bouton.addActionListener(new BoutonListener());
 		validerPanel.add(bouton);
 		container.add(validerPanel);
 
