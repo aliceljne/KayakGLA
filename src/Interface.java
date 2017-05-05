@@ -1,7 +1,5 @@
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -66,7 +64,7 @@ public class Interface extends JFrame {
 		// On termine le processus lorsqu'on clique sur la croix rouge
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		container.setBackground(Color.white);
+		container.setBackground(new Color(255,204,255));
 
 		// Initialisation des comboBox
 		container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
@@ -87,7 +85,7 @@ public class Interface extends JFrame {
 
 		/** ComboBox pour la date **/
 		JPanel datePanel = new JPanel();
-		datePanel.setBackground(Color.white);
+		datePanel.setBackground(new Color(255,204,255));
 		datePanel.add(jour);
 		datePanel.add(comboJour);
 		datePanel.add(mois);
@@ -99,7 +97,7 @@ public class Interface extends JFrame {
 
 		/** ComboBox pour l'horaire **/
 		JPanel horairePanel = new JPanel();
-		horairePanel.setBackground(Color.white);
+		horairePanel.setBackground(new Color(255,204,255));
 		horairePanel.add(horaire);
 		horairePanel.add(comboHoraire);
 		horairePanel.add(heures);
@@ -109,7 +107,7 @@ public class Interface extends JFrame {
 
 		/** ComboBox pour le transport **/
 		JPanel transportPanel = new JPanel();
-		transportPanel.setBackground(Color.white);
+		transportPanel.setBackground(new Color(255,204,255));
 		transportPanel.add(transport);
 		transportPanel.add(comboTransport);
 		container.add(transportPanel);
@@ -118,14 +116,14 @@ public class Interface extends JFrame {
 
 		// RadioButton pour les préférences alimentaires
 		JPanel preferencesPanel = new JPanel();
-		preferencesPanel.setBackground(Color.white);
-		bouton1.setBackground(Color.white);
-		bouton2.setBackground(Color.white);
-		bouton3.setBackground(Color.white);
-		bouton4.setBackground(Color.white);
-		bouton5.setBackground(Color.white);
-		bouton6.setBackground(Color.white);
-		bouton7.setBackground(Color.white);
+		preferencesPanel.setBackground(new Color(255,204,255));
+		bouton1.setBackground(new Color(255,204,255));
+		bouton2.setBackground(new Color(255,204,255));
+		bouton3.setBackground(new Color(255,204,255));
+		bouton4.setBackground(new Color(255,204,255));
+		bouton5.setBackground(new Color(255,204,255));
+		bouton6.setBackground(new Color(255,204,255));
+		bouton7.setBackground(new Color(255,204,255));
 		bouton1.addActionListener(new StateListener());
 		bouton2.addActionListener(new StateListener());
 		bouton3.addActionListener(new StateListener());
@@ -152,7 +150,7 @@ public class Interface extends JFrame {
 
 		// TextBox pour les adresses
 		JPanel adressesPanel = new JPanel();
-		adressesPanel.setBackground(Color.white);
+		adressesPanel.setBackground(new Color(255,204,255));
 		Font police = new Font("Arial", Font.BOLD, 14);
 		addr1.setFont(police);
 		addr1.setPreferredSize(new Dimension(250, 30));
@@ -199,7 +197,7 @@ public class Interface extends JFrame {
 
 		// Bouton de validation
 		JPanel validerPanel = new JPanel();
-		validerPanel.setBackground(Color.white);
+		validerPanel.setBackground(new Color(255,204,255));
 		bouton.addActionListener(new BoutonListener());
 		validerPanel.add(bouton);
 		container.add(validerPanel);
