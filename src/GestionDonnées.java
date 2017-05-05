@@ -15,6 +15,7 @@ public class GestionDonnees {
 	public static Utilisateur u = new Utilisateur();
 	public static double[] coordLat = new double[5];
 	public static double[] coordLng = new double[5];
+	public static double[] coordBar = new double[2];
 	public static double centerLat = 48.85340329999999;
 	public static double centerLng = 2.3487835999999334;
 	JSONObject bars;
@@ -116,6 +117,7 @@ public class GestionDonnees {
 
 		// build a JSON object
 		JSONObject obj = new JSONObject(str);
+		JSONObject loc = obj.getJSONObject("geometry").getJSONObject("location");
 		if (!obj.getString("status").equals("OK"))
 			return;
 
@@ -126,6 +128,8 @@ public class GestionDonnees {
 			System.out.println(tripletBar[0]);
 			tripletBar[1] =   lieu.getString("vicinity");
 			System.out.println(tripletBar[1]);
+			coordBar[0] = loc.getDouble("lat");
+			coordBar[1] = loc.getDouble("lng");
 			//tripletBar[2] =   photo.getJSONArray("html_attributions");
 			compteurRecherche++;
 		}
