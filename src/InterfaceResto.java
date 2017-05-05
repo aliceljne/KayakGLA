@@ -38,6 +38,7 @@ public class InterfaceResto extends JFrame {
 
 		// Ecrire les informations du bar
 		JPanel panelResto = new JPanel();
+		panelResto.setBackground(Color.white);
 		panelResto.add(nameResto);
 		nameResto.setFont(font);
 		panelResto.add(addrResto);
@@ -47,6 +48,7 @@ public class InterfaceResto extends JFrame {
 
 		// Boutons validations
 		JPanel panelButtonResto = new JPanel();
+		panelButtonResto.setBackground(Color.white);
 		okResto.addActionListener(new BoutonListener3());
 		panelButtonResto.add(okResto);
 		nonResto.addActionListener(new BoutonListener3());

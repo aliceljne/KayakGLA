@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -38,6 +39,7 @@ public class InterfaceBar extends JFrame {
 
 		// Ecrire les informations du bar
 		JPanel panelBar = new JPanel();
+		panelBar.setBackground(Color.white);
 		panelBar.add(nameBar);
 		nameBar.setFont(font);
 		panelBar.add(addrBar);
@@ -47,6 +49,7 @@ public class InterfaceBar extends JFrame {
 
 		// Boutons validations
 		JPanel panelButtonBar = new JPanel();
+		panelButtonBar.setBackground(Color.white);
 		okBar.addActionListener(new BoutonListener2());
 		panelButtonBar.add(okBar);
 		nonBar.addActionListener(new BoutonListener2());
