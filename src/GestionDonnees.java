@@ -115,9 +115,22 @@ public class GestionDonnees {
 
 		// build a JSON object
 		JSONObject obj = new JSONObject(str);
-		if (!obj.getString("status").equals("OK"))
+		if (!obj.getString("status").equals("ZERO_RESULTS")){
+			tripletBar[0] = "Pas de bar";
+			tripletBar[1] = "  ";
+			tripletBar[2] = "  ";
+			coordBar[0] = centerLat;
+			coordBar[1] = centerLng;
 			return;
-
+		} else if (!obj.getString("status").equals("OK")){
+			
+		tripletBar[0] = "Erreur";
+		tripletBar[1] = "  ";
+		tripletBar[2] = "  ";
+		coordBar[0] = centerLat;
+		coordBar[1] = centerLng;
+			return;
+		}
 			JSONObject lieu = (obj.getJSONArray("results")).getJSONObject(compteurRecherche%obj.length());
 			tripletBar[0] =   lieu.getString("name");
 			System.out.println(tripletBar[0]);
@@ -137,7 +150,7 @@ public class GestionDonnees {
 				}
 			}
 			
-			System.out.println(acc);
+			
 			tripletBar[2] = tripletBar[2].substring(0,acc-1);
 			
 			
@@ -159,9 +172,21 @@ public class GestionDonnees {
 
 		// build a JSON object
 		JSONObject obj = new JSONObject(str);
-		if (!obj.getString("status").equals("OK"))
+		if (!obj.getString("status").equals("ZERO_RESULTS")){
+			tripletResto[0] = "Pas de restaurant";
+			tripletResto[1] = "  ";
+			tripletResto[2] = "  ";
+			coordResto[0] = coordBar[0];
+			coordResto[1] = coordBar[1];
 			return;
-
+		} else if (!obj.getString("status").equals("OK")){
+			tripletResto[0] = "Erreur";
+			tripletResto[1] = "  ";
+			tripletResto[2] = "  ";
+			coordResto[0] = coordBar[0];
+			coordResto[1] = coordBar[1];
+			return;
+		}
 			JSONObject lieu = (obj.getJSONArray("results")).getJSONObject(compteurRecherche%obj.length());
 			//JSONObject photo = (lieu.getJSONArray("photos")).getJSONObject (compteurRecherche);
 			tripletResto[0] =   lieu.getString("name");
@@ -182,7 +207,7 @@ public class GestionDonnees {
 				}
 			}
 			
-			System.out.println(acc);
+			
 			tripletResto[2] = tripletResto[2].substring(0,acc-1);
 			
 			
@@ -204,9 +229,18 @@ public class GestionDonnees {
 
 		// build a JSON object
 		JSONObject obj = new JSONObject(str);
-		if (!obj.getString("status").equals("OK"))
+		if (!obj.getString("status").equals("ZERO_RESULTS")){
+			tripletBoite[0] = "Pas boîte de nuit";
+			tripletBoite[1] = "  ";
+			tripletBoite[2] = "  ";
 			return;
-
+		} else if (!obj.getString("status").equals("OK")){
+			tripletBoite[0] = "Erreur";
+			tripletBoite[1] = "  ";
+			tripletBoite[2] = "  ";
+			return;
+		}
+		
 			JSONObject lieu = (obj.getJSONArray("results")).getJSONObject(compteurRecherche%obj.length());
 			tripletBoite[0] =   lieu.getString("name");
 			tripletBoite[1] =   lieu.getString("vicinity");
@@ -222,7 +256,7 @@ public class GestionDonnees {
 				}
 			}
 			
-			System.out.println(acc);
+		
 			tripletBoite[2] = tripletBoite[2].substring(0,acc-1);
 			
 			System.out.println(tripletBoite[2]);
