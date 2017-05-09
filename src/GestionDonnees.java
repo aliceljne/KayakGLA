@@ -102,7 +102,7 @@ public class GestionDonnees {
 		getCenterCoord();
 	}
 
-	public static void NearbySearchBar(double Lat, double Lng) throws Exception {
+	ppublic static void NearbySearchBar(double Lat, double Lng) throws Exception {
 		String s = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + Lat + "," + Lng
 				+ "+&radius="+u.perimetre+"&type=bar&key=" + GooglePlacesKey;
 		URL url = new URL(s);
@@ -119,14 +119,24 @@ public class GestionDonnees {
 			return;
 
 			JSONObject lieu = (obj.getJSONArray("results")).getJSONObject(compteurRecherche%obj.length());
-			//JSONObject photo = (lieu.getJSONArray("photos")).getJSONObject (compteurRecherche);
 			tripletBar[0] =   lieu.getString("name");
 			System.out.println(tripletBar[0]);
 			tripletBar[1] =   lieu.getString("vicinity");
 			System.out.println(tripletBar[1]);
 			coordBar[0] = lieu.getJSONObject("geometry").getJSONObject("location").getDouble("lat");
 			coordBar[1] = lieu.getJSONObject("geometry").getJSONObject("location").getDouble("lng");
-			//tripletBar[2] =   photo.getJSONArray("html_attributions");
+			tripletBar[2] =   lieu.getJSONArray("photos").getJSONObject (0).getJSONArray("html_attributions").getString(0).substring(9);
+			boolean b = false;
+			int acc = 0;
+			//System.out.println(tripletBar[2]);
+			while (b==false){
+				if(tripletBar[2].charAt(acc) != '"'){
+					acc ++;
+				} else{
+					b = true;
+				}
+			}
+			tripletBar[2] = tripletBar[2].substring(0,acc-1);
 			compteurRecherche++;
 	}
 		
