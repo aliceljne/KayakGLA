@@ -1,7 +1,14 @@
 import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -17,7 +24,7 @@ public class InterfaceResto extends JFrame {
 	// Pour afficher le bar
 	private JLabel nameResto = new JLabel(GestionDonnees.tripletResto[0] + " :");
 	private JLabel addrResto = new JLabel(GestionDonnees.tripletResto[1]);
-	// private JLabel internetBar = new JLabel(GestionDonnees.tripletBar[2]);
+	private JLabel internetResto = new JLabel(GestionDonnees.tripletResto[2]);
 	// Boutons pour accepter ou refuser
 	private JButton okResto = new JButton("Je veux ce resto!");
 	private JButton nonResto = new JButton("Je ne veux pas ce resto!");
@@ -35,15 +42,16 @@ public class InterfaceResto extends JFrame {
 		container.setBackground(Color.white);
 		container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
 
-
-		// Ecrire les informations du bar
+		internetResto.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		addListener(internetResto);
+		// Ecrire les informations du resto
 		JPanel panelResto = new JPanel();
 		panelResto.setBackground(Color.white);
 		panelResto.add(nameResto);
 		nameResto.setFont(font);
 		panelResto.add(addrResto);
 		addrResto.setFont(font);
-		// panelBar.add(internetBar);
+		panelResto.add(internetResto);
 		container.add(panelResto);
 
 		// Boutons validations
@@ -57,6 +65,26 @@ public class InterfaceResto extends JFrame {
 
 		this.setContentPane(container);
 		this.setVisible(true);
+	}
+	
+	public void addListener(JLabel label_url) {
+    	label_url.addMouseListener(new MouseAdapter() {
+            //Click sur le lien
+            public void mouseClicked(MouseEvent e) {
+                JLabel label=(JLabel)e.getSource();
+                String plainText = label.getText();
+                System.out.println(plainText);
+                try {
+                    Desktop.getDesktop().browse(new URI(plainText));
+                } catch (URISyntaxException ex) {
+                    //Logger.getLogger(JLabelHyperlink.class.getName()).log(Level.SEVERE, null, ex);
+                	System.out.println("Erreur");
+                } catch (IOException ex) {
+                    //Logger.getLogger(JLabelHyperlink.class.getName()).log(Level.SEVERE, null, ex);
+                	System.out.println("Erreur !");
+                }
+            }
+    	});
 	}
 	
 	public class BoutonListener3 implements ActionListener{
