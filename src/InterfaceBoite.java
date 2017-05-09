@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Desktop;
@@ -20,14 +21,17 @@ public class InterfaceBoite extends JFrame {
 
 	private JPanel container = new JPanel();
 	private Font font = new Font("Arial", Font.BOLD, 20);
+	private Color color = new Color(255, 255, 200);
 
-	// Pour afficher le bar
+	// Pour afficher la boite
 	private JLabel nameBoite = new JLabel(GestionDonnees.tripletBoite[0] + " :");
 	private JLabel addrBoite = new JLabel(GestionDonnees.tripletBoite[1]);
-	private JLabel internetBoite = new JLabel(GestionDonnees.tripletBoite[2]);
+	private JLabel internetBoite = new JLabel(GestionDonnees.tripletBar[2]);
 	// Boutons pour accepter ou refuser
 	private JButton okBoite = new JButton("Je veux cette boite!");
 	private JButton nonBoite = new JButton("Je ne veux pas cette boite!");
+	// Bouton fin
+	private JButton ciao = new JButton("Bonne soirée !!");
 
 	public InterfaceBoite() {
 		// On nomme la fenetre
@@ -39,24 +43,24 @@ public class InterfaceBoite extends JFrame {
 		// On termine le processus lorsqu'on clique sur la croix rouge
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		container.setBackground(Color.white);
+		container.setBackground(color);
 		container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
 
 		internetBoite.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		addListener(internetBoite);
-		// Ecrire les informations de la boite
+		// Ecrire les informations du bar
 		JPanel panelBoite = new JPanel();
-		panelBoite.setBackground(Color.white);
+		panelBoite.setBackground(color);
 		panelBoite.add(nameBoite);
 		nameBoite.setFont(font);
 		panelBoite.add(addrBoite);
 		addrBoite.setFont(font);
-		panelBoite.add(internetBoite);
+		// panelBar.add(internetBar);
 		container.add(panelBoite);
 
 		// Boutons validations
 		JPanel panelButtonBoite = new JPanel();
-		panelButtonBoite.setBackground(Color.white);
+		panelButtonBoite.setBackground(color);
 		okBoite.addActionListener(new BoutonListener4());
 		panelButtonBoite.add(okBoite);
 		nonBoite.addActionListener(new BoutonListener4());
@@ -67,6 +71,7 @@ public class InterfaceBoite extends JFrame {
 		this.setVisible(true);
 	}
 	
+
 	public void addListener(JLabel label_url) {
     	label_url.addMouseListener(new MouseAdapter() {
             //Click sur le lien
@@ -86,9 +91,10 @@ public class InterfaceBoite extends JFrame {
             }
     	});
 	}
-	
-	public class BoutonListener4 implements ActionListener{
+
+	public class BoutonListener4 implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+
 			if (e.getSource() == nonBoite) {
 				try {
 					GestionDonnees.NearbySearchBoite(GestionDonnees.coordBar[0], GestionDonnees.coordBar[1]);
@@ -99,11 +105,51 @@ public class InterfaceBoite extends JFrame {
 				container.setVisible(false);
 				InterfaceBoite newF = new InterfaceBoite();
 			}
+
 			if (e.getSource() == okBoite) {
-				
 				container.setVisible(false);
+				// Fenetre pour patienter
+				JFrame finale = new JFrame();
+				finale.setTitle("Kayak");
+				finale.setSize(370, 150);
+				finale.setLocationRelativeTo(null);
+				Color c = new Color(255, 169, 255);
+
+				// Fenêtre finale triplet
+				JPanel panelFinale = new JPanel();
+				panelFinale.setBackground(c);
+				panelFinale.setLayout(new BoxLayout(panelFinale, BoxLayout.PAGE_AXIS));
+				Font font2 = new Font("Arial", Font.CENTER_BASELINE, 14);
+				JLabel l1 = new JLabel("Vous avez choisi : ");
+				l1.setFont(font2);
+				panelFinale.add(l1);
+				JLabel nameBar = new JLabel(GestionDonnees.tripletBar[0]);
+				// nameBar.setFont(font);
+				panelFinale.add(nameBar);
+				JLabel nameResto = new JLabel(GestionDonnees.tripletResto[0]);
+				// nameResto.setFont(font);
+				panelFinale.add(nameResto);
+				JLabel nameBoite = new JLabel(GestionDonnees.tripletBoite[0]);
+				// nameResto.setFont(font);
+				panelFinale.add(nameBoite);
+
+				// Bouton final
+				JPanel buttonCiao = new JPanel();
+				buttonCiao.setBackground(c);
+				ciao.addActionListener(new BoutonListener4());
+				buttonCiao.add(ciao);
+				buttonCiao.add(ciao, BorderLayout.PAGE_END);
+				panelFinale.add(buttonCiao);
+
+				finale.add(panelFinale);
+				finale.setVisible(true);
 			}
+			if (e.getSource() == ciao) {
+				 System.exit(0);
+			}
+
 		}
 	}
+	
 
 }
