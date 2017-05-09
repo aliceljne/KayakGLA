@@ -102,7 +102,7 @@ public class GestionDonnees {
 		getCenterCoord();
 	}
 
-	ppublic static void NearbySearchBar(double Lat, double Lng) throws Exception {
+	public static void NearbySearchBar(double Lat, double Lng) throws Exception {
 		String s = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + Lat + "," + Lng
 				+ "+&radius="+u.perimetre+"&type=bar&key=" + GooglePlacesKey;
 		URL url = new URL(s);
@@ -136,7 +136,13 @@ public class GestionDonnees {
 					b = true;
 				}
 			}
+			
+			System.out.println(acc);
 			tripletBar[2] = tripletBar[2].substring(0,acc-1);
+			
+			
+			
+			System.out.println(tripletBar[2]);
 			compteurRecherche++;
 	}
 		
