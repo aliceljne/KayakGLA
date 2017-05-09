@@ -115,7 +115,7 @@ public class GestionDonnees {
 
 		// build a JSON object
 		JSONObject obj = new JSONObject(str);
-		if (!obj.getString("status").equals("ZERO_RESULTS")){
+		if (obj.getString("status").equals("ZERO_RESULTS")){
 			tripletBar[0] = "Pas de bar";
 			tripletBar[1] = "  ";
 			tripletBar[2] = "  ";
@@ -172,7 +172,7 @@ public class GestionDonnees {
 
 		// build a JSON object
 		JSONObject obj = new JSONObject(str);
-		if (!obj.getString("status").equals("ZERO_RESULTS")){
+		if (obj.getString("status").equals("ZERO_RESULTS")){
 			tripletResto[0] = "Pas de restaurant";
 			tripletResto[1] = "  ";
 			tripletResto[2] = "  ";
@@ -229,7 +229,7 @@ public class GestionDonnees {
 
 		// build a JSON object
 		JSONObject obj = new JSONObject(str);
-		if (!obj.getString("status").equals("ZERO_RESULTS")){
+		if (obj.getString("status").equals("ZERO_RESULTS")){
 			tripletBoite[0] = "Pas boîte de nuit";
 			tripletBoite[1] = "  ";
 			tripletBoite[2] = "  ";
