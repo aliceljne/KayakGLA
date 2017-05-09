@@ -166,11 +166,28 @@ public class GestionDonnees {
 			//JSONObject photo = (lieu.getJSONArray("photos")).getJSONObject (compteurRecherche);
 			tripletResto[0] =   lieu.getString("name");
 			tripletResto[1] =   lieu.getString("vicinity");
-			//tripletResto[2] =   photo.getJSONArray("html_attributions");
+			tripletResto[2] =   lieu.getJSONArray("photos").getJSONObject (0).getJSONArray("html_attributions").getString(0).substring(9);
 			System.out.println(tripletBar[0]);
 			coordResto[0] = lieu.getJSONObject("geometry").getJSONObject("location").getDouble("lat");
 			System.out.println(tripletBar[1]);
 			coordResto[1] = lieu.getJSONObject("geometry").getJSONObject("location").getDouble("lng");
+			
+			boolean b = false;
+			int acc = 0;
+			while (b==false){
+				if(tripletResto[2].charAt(acc) != '"'){
+					acc ++;
+				} else{
+					b = true;
+				}
+			}
+			
+			System.out.println(acc);
+			tripletResto[2] = tripletResto[2].substring(0,acc-1);
+			
+			
+			
+			System.out.println(tripletResto[2]);
 			compteurRecherche++;
 	}
 	
@@ -191,10 +208,24 @@ public class GestionDonnees {
 			return;
 
 			JSONObject lieu = (obj.getJSONArray("results")).getJSONObject(compteurRecherche%obj.length());
-			//JSONObject photo = (lieu.getJSONArray("photos")).getJSONObject (compteurRecherche);
 			tripletBoite[0] =   lieu.getString("name");
 			tripletBoite[1] =   lieu.getString("vicinity");
-			//tripletBar[2] =   photo.getJSONArray("html_attributions");
+			tripletBoite[2] =   lieu.getJSONArray("photos").getJSONObject (0).getJSONArray("html_attributions").getString(0).substring(9);
+			
+			boolean b = false;
+			int acc = 0;
+			while (b==false){
+				if(tripletBoite[2].charAt(acc) != '"'){
+					acc ++;
+				} else{
+					b = true;
+				}
+			}
+			
+			System.out.println(acc);
+			tripletBoite[2] = tripletBoite[2].substring(0,acc-1);
+			
+			System.out.println(tripletBoite[2]);
 			compteurRecherche++;
 	}
 
