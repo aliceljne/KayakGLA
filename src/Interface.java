@@ -5,16 +5,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import javax.swing.*;
 
 public class Interface extends JFrame {
-//	public Utilisateur u = new Utilisateur();
 	private JPanel container = new JPanel();
 	String[] tabJour = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17",
 			"18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" };
-	// String[] tabMois = {"Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
-	// "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre"};
 	String[] tabMois = { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" };
 	String[] tabHoraire = { "16", "17", "18", "19", "20", "21", "22", "23", "00", "1", "2" };
 	String[] tabTransport = { "Marche", "Vélo", "Voiture", "Transports en commun" };
@@ -53,8 +51,9 @@ public class Interface extends JFrame {
 	private JButton sup3 = new JButton("-");
 	private JButton sup4 = new JButton("-");
 	private JButton sup5 = new JButton("-");
+	private Color color = new Color(211, 237, 248);
 
-	public Interface() {
+	public Interface() throws IOException {
 		// On nomme la fenetre
 		this.setTitle("Kayak");
 		// On definit sa taille en largeur et en hauteur
@@ -64,9 +63,8 @@ public class Interface extends JFrame {
 		// On termine le processus lorsqu'on clique sur la croix rouge
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		container.setBackground(new Color(255,204,255));
-
 		// Initialisation des comboBox
+		container.setBackground(color);
 		container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
 		comboJour.setPreferredSize(new Dimension(100, 20));
 		comboMois.setPreferredSize(new Dimension(120, 20));
@@ -83,9 +81,9 @@ public class Interface extends JFrame {
 		sup4.setPreferredSize(new Dimension(30, 20));
 		sup5.setPreferredSize(new Dimension(30, 20));
 
-		/** ComboBox pour la date **/
+		// ComboBox pour la date
 		JPanel datePanel = new JPanel();
-		datePanel.setBackground(new Color(255,204,255));
+		datePanel.setBackground(color);
 		datePanel.add(jour);
 		datePanel.add(comboJour);
 		datePanel.add(mois);
@@ -95,9 +93,9 @@ public class Interface extends JFrame {
 		comboJour.addItemListener(new ItemState());
 		comboMois.addItemListener(new ItemState());
 
-		/** ComboBox pour l'horaire **/
+		// ComboBox pour l'horaire
 		JPanel horairePanel = new JPanel();
-		horairePanel.setBackground(new Color(255,204,255));
+		horairePanel.setBackground(color);
 		horairePanel.add(horaire);
 		horairePanel.add(comboHoraire);
 		horairePanel.add(heures);
@@ -105,9 +103,9 @@ public class Interface extends JFrame {
 		// Ajout du listener
 		comboHoraire.addItemListener(new ItemState());
 
-		/** ComboBox pour le transport **/
+		// ComboBox pour le transport 
 		JPanel transportPanel = new JPanel();
-		transportPanel.setBackground(new Color(255,204,255));
+		transportPanel.setBackground(color);
 		transportPanel.add(transport);
 		transportPanel.add(comboTransport);
 		container.add(transportPanel);
@@ -116,14 +114,14 @@ public class Interface extends JFrame {
 
 		// RadioButton pour les préférences alimentaires
 		JPanel preferencesPanel = new JPanel();
-		preferencesPanel.setBackground(new Color(255,204,255));
-		bouton1.setBackground(new Color(255,204,255));
-		bouton2.setBackground(new Color(255,204,255));
-		bouton3.setBackground(new Color(255,204,255));
-		bouton4.setBackground(new Color(255,204,255));
-		bouton5.setBackground(new Color(255,204,255));
-		bouton6.setBackground(new Color(255,204,255));
-		bouton7.setBackground(new Color(255,204,255));
+		preferencesPanel.setBackground(color);
+		bouton1.setBackground(color);
+		bouton2.setBackground(color);
+		bouton3.setBackground(color);
+		bouton4.setBackground(color);
+		bouton5.setBackground(color);
+		bouton6.setBackground(color);
+		bouton7.setBackground(color);
 		bouton1.addActionListener(new StateListener());
 		bouton2.addActionListener(new StateListener());
 		bouton3.addActionListener(new StateListener());
@@ -150,7 +148,7 @@ public class Interface extends JFrame {
 
 		// TextBox pour les adresses
 		JPanel adressesPanel = new JPanel();
-		adressesPanel.setBackground(new Color(255,204,255));
+		adressesPanel.setBackground(color);
 		Font police = new Font("Arial", Font.BOLD, 14);
 		addr1.setFont(police);
 		addr1.setPreferredSize(new Dimension(250, 30));
@@ -197,7 +195,7 @@ public class Interface extends JFrame {
 
 		// Bouton de validation
 		JPanel validerPanel = new JPanel();
-		validerPanel.setBackground(new Color(255,204,255));
+		validerPanel.setBackground(color);
 		bouton.addActionListener(new BoutonListener());
 		validerPanel.add(bouton);
 		container.add(validerPanel);
@@ -270,7 +268,6 @@ public class Interface extends JFrame {
 			}
 
 			// Suppression des adresses
-
 			if (e.getSource() == sup1) {
 				GestionDonnees.u.supprimerAdresse(addr1.getText());
 				addr1.setText("");
@@ -296,7 +293,8 @@ public class Interface extends JFrame {
 				addr5.setText("");
 				GestionDonnees.u.afficheAdresses(GestionDonnees.u.adresses);
 			}
-
+			
+			// bouton de validation
 			if (e.getSource() == bouton) {
 
 				container.setEnabled(false);
@@ -308,7 +306,6 @@ public class Interface extends JFrame {
 				try {
 					GestionDonnees.NearbySearchBar(GestionDonnees.centerLat, GestionDonnees.centerLng);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				
