@@ -28,6 +28,7 @@ public class InterfaceBoite extends JFrame {
 	private JLabel addrBoite = new JLabel(GestionDonnees.tripletBoite[1]);
 	private JLabel internetBoite = new JLabel(GestionDonnees.tripletBar[2]);
 	// Boutons pour accepter ou refuser
+	private JButton url = new JButton("Lien Google Maps");
 	private JButton okBoite = new JButton("Je veux cette boite!");
 	private JButton nonBoite = new JButton("Je ne veux pas cette boite!");
 	// Bouton fin
@@ -46,8 +47,6 @@ public class InterfaceBoite extends JFrame {
 		container.setBackground(color);
 		container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
 
-		internetBoite.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		addListener(internetBoite);
 		// Ecrire les informations du bar
 		JPanel panelBoite = new JPanel();
 		panelBoite.setBackground(color);
@@ -57,6 +56,13 @@ public class InterfaceBoite extends JFrame {
 		addrBoite.setFont(font);
 		// panelBar.add(internetBar);
 		container.add(panelBoite);
+
+		// Bouton URL
+		JPanel panelURL = new JPanel();
+		panelURL.setBackground(color);
+		panelURL.add(url);
+		url.addActionListener(new BoutonListener4());
+		container.add(panelURL);
 
 		// Boutons validations
 		JPanel panelButtonBoite = new JPanel();
@@ -70,26 +76,27 @@ public class InterfaceBoite extends JFrame {
 		this.setContentPane(container);
 		this.setVisible(true);
 	}
-	
 
 	public void addListener(JLabel label_url) {
-    	label_url.addMouseListener(new MouseAdapter() {
-            //Click sur le lien
-            public void mouseClicked(MouseEvent e) {
-                JLabel label=(JLabel)e.getSource();
-                String plainText = label.getText();
-                System.out.println(plainText);
-                try {
-                    Desktop.getDesktop().browse(new URI(plainText));
-                } catch (URISyntaxException ex) {
-                    //Logger.getLogger(JLabelHyperlink.class.getName()).log(Level.SEVERE, null, ex);
-                	System.out.println("Erreur");
-                } catch (IOException ex) {
-                    //Logger.getLogger(JLabelHyperlink.class.getName()).log(Level.SEVERE, null, ex);
-                	System.out.println("Erreur !");
-                }
-            }
-    	});
+		label_url.addMouseListener(new MouseAdapter() {
+			// Click sur le lien
+			public void mouseClicked(MouseEvent e) {
+				JLabel label = (JLabel) e.getSource();
+				String plainText = label.getText();
+				System.out.println(plainText);
+				try {
+					Desktop.getDesktop().browse(new URI(plainText));
+				} catch (URISyntaxException ex) {
+					// Logger.getLogger(JLabelHyperlink.class.getName()).log(Level.SEVERE,
+					// null, ex);
+					System.out.println("Erreur");
+				} catch (IOException ex) {
+					// Logger.getLogger(JLabelHyperlink.class.getName()).log(Level.SEVERE,
+					// null, ex);
+					System.out.println("Erreur !");
+				}
+			}
+		});
 	}
 
 	public class BoutonListener4 implements ActionListener {
@@ -106,6 +113,16 @@ public class InterfaceBoite extends JFrame {
 				InterfaceBoite newF = new InterfaceBoite();
 			}
 
+			if (e.getSource() == url) {
+				String plainText = internetBoite.getText();
+				try {
+					Desktop.getDesktop().browse(new URI(plainText));
+				} catch (IOException | URISyntaxException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
 			if (e.getSource() == okBoite) {
 				container.setVisible(false);
 				// Fenetre pour patienter
@@ -113,7 +130,7 @@ public class InterfaceBoite extends JFrame {
 				finale.setTitle("Kayak");
 				finale.setSize(370, 150);
 				finale.setLocationRelativeTo(null);
-				Color c = new Color(255, 169, 255);
+				Color c = new Color(233, 218, 250);
 
 				// Fenêtre finale triplet
 				JPanel panelFinale = new JPanel();
@@ -145,11 +162,10 @@ public class InterfaceBoite extends JFrame {
 				finale.setVisible(true);
 			}
 			if (e.getSource() == ciao) {
-				 System.exit(0);
+				System.exit(0);
 			}
 
 		}
 	}
-	
 
 }
