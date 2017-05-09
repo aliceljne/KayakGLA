@@ -1,12 +1,9 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -19,19 +16,22 @@ import javax.swing.JPanel;
 
 public class InterfaceBoite extends JFrame {
 
+	// Initialisation des caractéristiques de la fenêtre
 	private JPanel container = new JPanel();
 	private Font font = new Font("Arial", Font.BOLD, 20);
 	private Color color = new Color(255, 255, 200);
 
-	// Pour afficher la boite
+	// Label pour les infos de la boite
 	private JLabel nameBoite = new JLabel(GestionDonnees.tripletBoite[0] + " :");
 	private JLabel addrBoite = new JLabel(GestionDonnees.tripletBoite[1]);
 	private JLabel internetBoite = new JLabel(GestionDonnees.tripletBar[2]);
-	// Boutons pour accepter ou refuser
+	
+	// Boutons pour l'URL Google Maps, accepter ou refuser un bar
 	private JButton url = new JButton("Lien Google Maps");
 	private JButton okBoite = new JButton("Je veux cette boite!");
 	private JButton nonBoite = new JButton("Je ne veux pas cette boite!");
-	// Bouton fin
+	
+	// Bouton de fin
 	private JButton ciao = new JButton("Bonne soirée !!");
 
 	public InterfaceBoite() {
@@ -43,11 +43,11 @@ public class InterfaceBoite extends JFrame {
 		this.setLocationRelativeTo(null);
 		// On termine le processus lorsqu'on clique sur la croix rouge
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		// Background et Layout
 		container.setBackground(color);
 		container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
 
-		// Ecrire les informations du bar
+		// Ecrire les informations de la boite
 		JPanel panelBoite = new JPanel();
 		panelBoite.setBackground(color);
 		panelBoite.add(nameBoite);
@@ -64,7 +64,7 @@ public class InterfaceBoite extends JFrame {
 		url.addActionListener(new BoutonListener4());
 		container.add(panelURL);
 
-		// Boutons validations
+		// Boutons de validations
 		JPanel panelButtonBoite = new JPanel();
 		panelButtonBoite.setBackground(color);
 		okBoite.addActionListener(new BoutonListener4());
@@ -77,45 +77,28 @@ public class InterfaceBoite extends JFrame {
 		this.setVisible(true);
 	}
 
-	public void addListener(JLabel label_url) {
-		label_url.addMouseListener(new MouseAdapter() {
-			// Click sur le lien
-			public void mouseClicked(MouseEvent e) {
-				JLabel label = (JLabel) e.getSource();
-				String plainText = label.getText();
-				System.out.println(plainText);
-				try {
-					Desktop.getDesktop().browse(new URI(plainText));
-				} catch (URISyntaxException ex) {
-					// Logger.getLogger(JLabelHyperlink.class.getName()).log(Level.SEVERE,
-					// null, ex);
-					System.out.println("Erreur");
-				} catch (IOException ex) {
-					// Logger.getLogger(JLabelHyperlink.class.getName()).log(Level.SEVERE,
-					// null, ex);
-					System.out.println("Erreur !");
-				}
-			}
-		});
-	}
-
 	public class BoutonListener4 implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 
+			// Quand on accepte pas la boite proposée
 			if (e.getSource() == nonBoite) {
 				try {
+					// Rappel de la méthode recherche de la boite
 					GestionDonnees.NearbySearchBoite(GestionDonnees.coordBar[0], GestionDonnees.coordBar[1]);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				container.setVisible(false);
+				// Rappel de l'interface pour la boite
 				InterfaceBoite newF = new InterfaceBoite();
 			}
 
+			// Quand on clic sur "Lien Google Maps"
 			if (e.getSource() == url) {
 				String plainText = internetBoite.getText();
 				try {
+					// Ouverture de la page Google Maps sur internet
 					Desktop.getDesktop().browse(new URI(plainText));
 				} catch (IOException | URISyntaxException e1) {
 					// TODO Auto-generated catch block
@@ -123,16 +106,18 @@ public class InterfaceBoite extends JFrame {
 				}
 			}
 
+			// Quand on accepte la boite proposée
 			if (e.getSource() == okBoite) {
 				container.setVisible(false);
-				// Fenetre pour patienter
+				
+				// Fenêtre finale triplet
 				JFrame finale = new JFrame();
 				finale.setTitle("Kayak");
 				finale.setSize(370, 150);
 				finale.setLocationRelativeTo(null);
 				Color c = new Color(233, 218, 250);
 
-				// Fenêtre finale triplet
+				// Panel pour afficher le triplet Bar-Resto-Boite
 				JPanel panelFinale = new JPanel();
 				panelFinale.setBackground(c);
 				panelFinale.setLayout(new BoxLayout(panelFinale, BoxLayout.PAGE_AXIS));
@@ -141,13 +126,10 @@ public class InterfaceBoite extends JFrame {
 				l1.setFont(font2);
 				panelFinale.add(l1);
 				JLabel nameBar = new JLabel(GestionDonnees.tripletBar[0]);
-				// nameBar.setFont(font);
 				panelFinale.add(nameBar);
 				JLabel nameResto = new JLabel(GestionDonnees.tripletResto[0]);
-				// nameResto.setFont(font);
 				panelFinale.add(nameResto);
 				JLabel nameBoite = new JLabel(GestionDonnees.tripletBoite[0]);
-				// nameResto.setFont(font);
 				panelFinale.add(nameBoite);
 
 				// Bouton final
@@ -161,7 +143,10 @@ public class InterfaceBoite extends JFrame {
 				finale.add(panelFinale);
 				finale.setVisible(true);
 			}
+			
+			// Quand on clic sur "Bonne soirée !!" 
 			if (e.getSource() == ciao) {
+				// On quitte l'application
 				System.exit(0);
 			}
 
