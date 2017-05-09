@@ -1,7 +1,14 @@
 import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -17,7 +24,7 @@ public class InterfaceBoite extends JFrame {
 	// Pour afficher le bar
 	private JLabel nameBoite = new JLabel(GestionDonnees.tripletBoite[0] + " :");
 	private JLabel addrBoite = new JLabel(GestionDonnees.tripletBoite[1]);
-	// private JLabel internetBar = new JLabel(GestionDonnees.tripletBar[2]);
+	private JLabel internetBoite = new JLabel(GestionDonnees.tripletBoite[2]);
 	// Boutons pour accepter ou refuser
 	private JButton okBoite = new JButton("Je veux cette boite!");
 	private JButton nonBoite = new JButton("Je ne veux pas cette boite!");
@@ -35,18 +42,21 @@ public class InterfaceBoite extends JFrame {
 		container.setBackground(Color.white);
 		container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
 
-
-		// Ecrire les informations du bar
+		internetBoite.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		addListener(internetBoite);
+		// Ecrire les informations de la boite
 		JPanel panelBoite = new JPanel();
+		panelBoite.setBackground(Color.white);
 		panelBoite.add(nameBoite);
 		nameBoite.setFont(font);
 		panelBoite.add(addrBoite);
 		addrBoite.setFont(font);
-		// panelBar.add(internetBar);
+		panelBoite.add(internetBoite);
 		container.add(panelBoite);
 
 		// Boutons validations
 		JPanel panelButtonBoite = new JPanel();
+		panelButtonBoite.setBackground(Color.white);
 		okBoite.addActionListener(new BoutonListener4());
 		panelButtonBoite.add(okBoite);
 		nonBoite.addActionListener(new BoutonListener4());
@@ -55,6 +65,26 @@ public class InterfaceBoite extends JFrame {
 
 		this.setContentPane(container);
 		this.setVisible(true);
+	}
+	
+	public void addListener(JLabel label_url) {
+    	label_url.addMouseListener(new MouseAdapter() {
+            //Click sur le lien
+            public void mouseClicked(MouseEvent e) {
+                JLabel label=(JLabel)e.getSource();
+                String plainText = label.getText();
+                System.out.println(plainText);
+                try {
+                    Desktop.getDesktop().browse(new URI(plainText));
+                } catch (URISyntaxException ex) {
+                    //Logger.getLogger(JLabelHyperlink.class.getName()).log(Level.SEVERE, null, ex);
+                	System.out.println("Erreur");
+                } catch (IOException ex) {
+                    //Logger.getLogger(JLabelHyperlink.class.getName()).log(Level.SEVERE, null, ex);
+                	System.out.println("Erreur !");
+                }
+            }
+    	});
 	}
 	
 	public class BoutonListener4 implements ActionListener{
