@@ -6,7 +6,7 @@ Pican Gaëtan
 Groupe K
 
 Vous êtes seul ou avec plusieurs amis et souhaitez
-sortir boire un verre dans un bar, manger un morcau 
+sortir boire un verre dans un bar, manger un morceau 
 dans un restaurant puis aller faire la fête dans une boîte de nuit mais vous ne savez pas où aller?
 
 Kayak est fait pour vous! 
