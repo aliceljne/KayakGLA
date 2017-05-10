@@ -23,7 +23,7 @@ public class InterfaceResto extends JFrame {
 	// Label pour les infos du resto
 	private JLabel nameResto = new JLabel(GestionDonnees.tripletResto[0] + " :");
 	private JLabel addrResto = new JLabel(GestionDonnees.tripletResto[1]);
-	private JLabel internetResto = new JLabel(GestionDonnees.tripletBar[2]);
+	private JLabel internetResto = new JLabel(GestionDonnees.tripletResto[2]);
 	
 	// Boutons pour l'URL Google Maps, accepter ou refuser un bar
 	private JButton url = new JButton("Lien Google Maps");
