@@ -24,7 +24,7 @@ public class InterfaceBoite extends JFrame {
 	// Label pour les infos de la boite
 	private JLabel nameBoite = new JLabel(GestionDonnees.tripletBoite[0] + " :");
 	private JLabel addrBoite = new JLabel(GestionDonnees.tripletBoite[1]);
-	private JLabel internetBoite = new JLabel(GestionDonnees.tripletResto[2]);
+	private JLabel internetBoite = new JLabel(GestionDonnees.tripletBoite[2]);
 	
 	// Boutons pour l'URL Google Maps, accepter ou refuser un bar
 	private JButton url = new JButton("Lien Google Maps");
