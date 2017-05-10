@@ -1,8 +1,10 @@
 # KayakGLA
 Projet GLA L3 Informatique
+
 Lejeune Alice
 Maquaire Auriane
 Pican Gaëtan
+
 Groupe K
 
 Vous êtes seul ou avec plusieurs amis et souhaitez
