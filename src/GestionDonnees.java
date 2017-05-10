@@ -1,4 +1,4 @@
-import java.net.URL;
+iimport java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -106,7 +106,7 @@ public class GestionDonnees {
 		getCenterCoord();
 	}
 
-	// trouve le bar le plus proche des coordonnées fournies en paramètre
+	// trouve le meilleur bar des environs des coordonnées fournies en paramètre
 	public static void NearbySearchBar(double Lat, double Lng) throws Exception {
 		String s = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + Lat + "," + Lng
 				+ "+&radius=" + u.perimetre + "&type=bar&key=" + GooglePlacesKey;
@@ -148,10 +148,10 @@ public class GestionDonnees {
 		coordBar[0] = lieu.getJSONObject("geometry").getJSONObject("location").getDouble("lat");
 		coordBar[1] = lieu.getJSONObject("geometry").getJSONObject("location").getDouble("lng");
 		tripletBar[2] = "https://www.google.com/maps/?q=" + tripletunparse;
-		
+		compteurRecherche ++;
 	}
 
-	// trouve le restaurant le plus proche des coordonnées fournies en paramètre
+	// trouve le meilleur restaurant des environs des coordonnées fournies en paramètre
 	public static void NearbySearchResto(double Lat, double Lng) throws Exception {
 		String s = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + Lat + "," + Lng
 				+ "+&radius=" + u.perimetre + "&type=restaurant&name=" + u.preference + "&key=" + GooglePlacesKey;
@@ -192,10 +192,10 @@ public class GestionDonnees {
 		coordResto[0] = lieu.getJSONObject("geometry").getJSONObject("location").getDouble("lat");
 		System.out.println(tripletBar[1]);
 		coordResto[1] = lieu.getJSONObject("geometry").getJSONObject("location").getDouble("lng");
-
+		compteurRecherche ++;
 	}
 
-	// trouve la boite de nuit le plus proche des coordonnées fournies en paramètre
+	// trouve la meilleure boite de nuit des environs des coordonnées fournies en paramètre
 	public static void NearbySearchBoite(double Lat, double Lng) throws Exception {
 		String s = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + Lat + "," + Lng
 				+ "+&radius=" + u.perimetre + "&type=night_club&key=" + GooglePlacesKey;
@@ -228,7 +228,7 @@ public class GestionDonnees {
 		tripletBoite[1] = lieu.getString("vicinity");
 		String tripletunparse = parseAddr(tripletBoite[1]);
 		tripletBoite[2] = "https://www.google.com/maps/?q=" + tripletunparse;
-
+		compteurRecherche ++;
 	}
 
 	public static void main(String[] args) throws Exception {
