@@ -17,4 +17,5 @@ Kayak nécessite une connection Internet pour pouvoir fonctionner.
 
 Il est nécessaire d'avoir  java-json.jar pour que kakak puisse compiler.
 
-Kayak peut être compilé grâce à Eclipse.
+Pour lancer Kayak, il suffit d'executer le jar kayak.jar.
+On peut également le compiler depuis un logiciel comme eclipse.
