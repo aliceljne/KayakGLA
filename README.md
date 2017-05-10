@@ -2,7 +2,9 @@
 Projet GLA L3 Informatique
 
 Lejeune Alice
+
 Maquaire Auriane
+
 Pican Gaëtan
 
 Groupe K
@@ -20,4 +22,5 @@ Kayak nécessite une connection Internet pour pouvoir fonctionner.
 Il est nécessaire d'avoir java-json.jar pour que Kayak puisse compiler.
 
 Pour lancer Kayak, il suffit d'executer le jar kayak.jar.
+
 On peut également le compiler puis le lancer depuis un logiciel comme eclipse.
