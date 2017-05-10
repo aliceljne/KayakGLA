@@ -25,7 +25,7 @@ public class GestionDonnees {
 	public GestionDonnees() {
 	}
 
-	// 1600+Amphitheatre+Parkway,+Mountain+View,
+	//remplace les " " d'une adresse par un +
 	public static String parseAddr(String addr) {
 		return addr.replace(' ', '+');
 	}
@@ -38,19 +38,19 @@ public class GestionDonnees {
 		s += URLEncoder.encode(addrParsed, "UTF-8");
 		URL url = new URL(s);
 
-		// read from the URL
+		// lit l'URL
 		Scanner scan = new Scanner(url.openStream());
 		String str = new String();
 		while (scan.hasNext())
 			str += scan.nextLine();
 		scan.close();
 
-		// build a JSON object
+		// fabrique l'objet JSON, arrête la fonction en cas de problème
 		JSONObject obj = new JSONObject(str);
 		if (!obj.getString("status").equals("OK"))
 			return;
 
-		// get the first result
+		// prend le premier resultat
 		JSONObject res = obj.getJSONArray("results").getJSONObject(0);
 		System.out.println(res.getString("formatted_address"));
 		JSONObject loc = res.getJSONObject("geometry").getJSONObject("location");
@@ -61,6 +61,8 @@ public class GestionDonnees {
 		System.out.println("lat: " + loc.getDouble("lat") + ", lng: " + loc.getDouble("lng"));
 	}
 
+
+	// retourne le milieu d'un nuage de points
 	public static void getCenterCoord() {
 		double sommeLat = 0;
 		double sommeLng = 0;
@@ -84,6 +86,7 @@ public class GestionDonnees {
 		System.out.println("centerLng : " + centerLng);
 	}
 	
+	// retourne le barycentre de plusieurs adresses
 	public static void getBarycentre(){
 		int numAddr = 1;
 		for(String addr : u.adresses){
@@ -102,18 +105,20 @@ public class GestionDonnees {
 		getCenterCoord();
 	}
 
+
+	// trouve le bar le plus proche des coordonnées fournies en paramètre
 	public static void NearbySearchBar(double Lat, double Lng) throws Exception {
 		String s = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + Lat + "," + Lng
 				+ "+&radius="+u.perimetre+"&type=bar&key=" + GooglePlacesKey;
 		URL url = new URL(s);
-		// read from the URL
+		//lit l'URL
 		Scanner scan = new Scanner(url.openStream());
 		String str = new String();
 		while (scan.hasNext())
 			str += scan.nextLine();
 		scan.close();
 
-		// build a JSON object
+		// Fabrique le JSON contenant les resultats. arrête la fonction en cas d'erreur ou s'il n'y a pas de resultats 
 		JSONObject obj = new JSONObject(str);
 		if (obj.getString("status").equals("ZERO_RESULTS")){
 			tripletBar[0] = "Pas de bar";
@@ -131,6 +136,7 @@ public class GestionDonnees {
 		coordBar[1] = centerLng;
 			return;
 		}
+			//donne au tableau tripletBar[] le nom du bar, son adresse courte et ses photos sur GoogleMaps
 			JSONObject lieu = (obj.getJSONArray("results")).getJSONObject(compteurRecherche%obj.length());
 			tripletBar[0] =   lieu.getString("name");
 			System.out.println(tripletBar[0]);
@@ -141,7 +147,8 @@ public class GestionDonnees {
 			tripletBar[2] =   lieu.getJSONArray("photos").getJSONObject (0).getJSONArray("html_attributions").getString(0).substring(9);
 			boolean b = false;
 			int acc = 0;
-			//System.out.println(tripletBar[2]);
+			
+			// supprime le texte inutile du lien des photos pour ne garder que l'URL
 			while (b==false){
 				if(tripletBar[2].charAt(acc) != '"'){
 					acc ++;
@@ -149,28 +156,24 @@ public class GestionDonnees {
 					b = true;
 				}
 			}
-			
-			
 			tripletBar[2] = tripletBar[2].substring(0,acc-1);
-			
-			
-			
 			System.out.println(tripletBar[2]);
 			compteurRecherche++;
 	}
-		
+	
+	//trouve le restaurant le plus proche des coordonnées fournies en paramètre	
 	public static void NearbySearchResto(double Lat, double Lng) throws Exception {
 		String s = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + Lat + "," + Lng
 				+ "+&radius="+u.perimetre+"&type=restaurant&name="+u.preference+"&key=" + GooglePlacesKey;
 		URL url = new URL(s);
-		// read from the URL
+		// lit l'URL
 		Scanner scan = new Scanner(url.openStream());
 		String str = new String();
 		while (scan.hasNext())
 			str += scan.nextLine();
 		scan.close();
 
-		// build a JSON object
+		// Fabrique le JSON contenant les resultats. arrête la fonction en cas d'erreur ou s'il n'y a pas de resultats 
 		JSONObject obj = new JSONObject(str);
 		if (obj.getString("status").equals("ZERO_RESULTS")){
 			tripletResto[0] = "Pas de restaurant";
@@ -187,8 +190,8 @@ public class GestionDonnees {
 			coordResto[1] = coordBar[1];
 			return;
 		}
+			//donne au tableau tripletResto[] le nom du bar, son adresse courte et ses photos sur GoogleMaps
 			JSONObject lieu = (obj.getJSONArray("results")).getJSONObject(compteurRecherche%obj.length());
-			//JSONObject photo = (lieu.getJSONArray("photos")).getJSONObject (compteurRecherche);
 			tripletResto[0] =   lieu.getString("name");
 			tripletResto[1] =   lieu.getString("vicinity");
 			tripletResto[2] =   lieu.getJSONArray("photos").getJSONObject (0).getJSONArray("html_attributions").getString(0).substring(9);
@@ -197,6 +200,7 @@ public class GestionDonnees {
 			System.out.println(tripletBar[1]);
 			coordResto[1] = lieu.getJSONObject("geometry").getJSONObject("location").getDouble("lng");
 			
+			// supprime le texte inutile du lien des photos pour ne garder que l'URL
 			boolean b = false;
 			int acc = 0;
 			while (b==false){
@@ -206,28 +210,24 @@ public class GestionDonnees {
 					b = true;
 				}
 			}
-			
-			
 			tripletResto[2] = tripletResto[2].substring(0,acc-1);
-			
-			
-			
 			System.out.println(tripletResto[2]);
 			compteurRecherche++;
 	}
 	
+	// trouve le bar le plus proche des coordonnées fournies en paramètre
 	public static void NearbySearchBoite(double Lat, double Lng) throws Exception {
 		String s = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + Lat + "," + Lng
 				+ "+&radius="+u.perimetre+"&type=night_club&key=" + GooglePlacesKey;
 		URL url = new URL(s);
-		// read from the URL
+		// lit l'URL
 		Scanner scan = new Scanner(url.openStream());
 		String str = new String();
 		while (scan.hasNext())
 			str += scan.nextLine();
 		scan.close();
 
-		// build a JSON object
+		// Fabrique le JSON contenant les resultats. arrête la fonction en cas d'erreur ou s'il n'y a pas de resultats 
 		JSONObject obj = new JSONObject(str);
 		if (obj.getString("status").equals("ZERO_RESULTS")){
 			tripletBoite[0] = "Pas boîte de nuit";
@@ -240,7 +240,7 @@ public class GestionDonnees {
 			tripletBoite[2] = "  ";
 			return;
 		}
-		
+			//donne au tableau tripletBoite[] le nom du bar, son adresse courte et ses photos sur GoogleMaps
 			JSONObject lieu = (obj.getJSONArray("results")).getJSONObject(compteurRecherche%obj.length());
 			tripletBoite[0] =   lieu.getString("name");
 			tripletBoite[1] =   lieu.getString("vicinity");
@@ -255,10 +255,8 @@ public class GestionDonnees {
 					b = true;
 				}
 			}
-			
-		
-			tripletBoite[2] = tripletBoite[2].substring(0,acc-1);
-			
+			// supprime le texte inutile du lien des photos pour ne garder que l'URL
+			tripletBoite[2] = tripletBoite[2].substring(0,acc-1);			
 			System.out.println(tripletBoite[2]);
 			compteurRecherche++;
 	}
@@ -292,3 +290,4 @@ public class GestionDonnees {
 	}
 
 }
+
