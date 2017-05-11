@@ -105,6 +105,8 @@ public class GestionDonnees {
 
 	// trouve le bar le plus proche des coordonnées fournies en paramètre
 	public static void NearbySearchBar(double Lat, double Lng) throws Exception {
+		//"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + Lat + "," + Lng
+		//+ "+&rankby=distance "&type=bar&key=" + GooglePlacesKey;
 		String s = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + Lat + "," + Lng
 				+ "+&radius=" + u.perimetre + "&type=bar&key=" + GooglePlacesKey;
 		URL url = new URL(s);
@@ -151,6 +153,8 @@ public class GestionDonnees {
 	public static void NearbySearchResto(double Lat, double Lng) throws Exception {
 		String s = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + Lat + "," + Lng
 				+ "+&radius=" + u.perimetre + "&type=restaurant&name=" + u.preference + "&key=" + GooglePlacesKey;
+		//"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + Lat + "," + Lng
+		//		+ "+&rankby=distance&type=restaurant&name=" + u.preference + "&key=" + GooglePlacesKey;
 		URL url = new URL(s);
 		// lit l'URL
 		Scanner scan = new Scanner(url.openStream());
@@ -195,6 +199,8 @@ public class GestionDonnees {
 	public static void NearbySearchBoite(double Lat, double Lng) throws Exception {
 		String s = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + Lat + "," + Lng
 				+ "+&radius=" + u.perimetre + "&type=night_club&key=" + GooglePlacesKey;
+		//"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + Lat + "," + Lng
+		//		+ "+&rankby=distance&type=night_club&key=" + GooglePlacesKey;
 		URL url = new URL(s);
 		// lit l'URL
 		Scanner scan = new Scanner(url.openStream());
